@@ -1,0 +1,24 @@
+2025-02-04 11:32:17 INFO  hutech.dacn.hospital.Server - Starting Server using Java 22.0.2 with PID 50390 (/home/ntq612/quy.nguyen/HospitalManagement/target/classes started by ntq612 in /home/ntq612/quy.nguyen/HospitalManagement)
+2025-02-04 11:32:17 INFO  hutech.dacn.hospital.Server - No active profile set, falling back to 1 default profile: "default"
+2025-02-04 11:32:18 INFO  console - =================== Jetty Server ==========
+=== port:       8080                    ===
+=== min thread:          8              ===
+=== max thread:         16              ===
+=== idle timeout:       5000            ===
+=== max queue size:     160000          ===
+===========================================
+
+2025-02-04 11:32:18 INFO  org.eclipse.jetty.server.Server - jetty-12.0.11; built: 2024-06-27T23:42:49.912Z; git: 9f90cedce372142f30c744a16a38d2c6bf634ab6; jvm 22.0.2+9-70
+2025-02-04 11:32:18 INFO  o.e.j.s.h.ContextHandler.application - Initializing Spring embedded WebApplicationContext
+2025-02-04 11:32:18 INFO  o.e.j.s.DefaultSessionIdManager - Session workerName=node0
+2025-02-04 11:32:18 INFO  o.e.j.server.handler.ContextHandler - Started osbwej.JettyEmbeddedWebAppContext@5853ca50{application,/,b=file:/tmp/jetty-docbase.8080.11771772217395876606/,a=AVAILABLE,h=oeje10s.SessionHandler@1a0d96a5{STARTED}}
+2025-02-04 11:32:18 INFO  o.e.j.e.s.ServletContextHandler - Started osbwej.JettyEmbeddedWebAppContext@5853ca50{application,/,b=file:/tmp/jetty-docbase.8080.11771772217395876606/,a=AVAILABLE,h=oeje10s.SessionHandler@1a0d96a5{STARTED}}
+2025-02-04 11:32:18 INFO  org.eclipse.jetty.server.Server - Started oejs.Server@41eb94bc{STARTING}[12.0.11,sto=0] @3081ms
+2025-02-04 11:32:18 INFO  o.e.j.s.h.ContextHandler.application - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-02-04 11:32:18 INFO  o.e.jetty.server.AbstractConnector - Started ServerConnector@16da1abc{HTTP/1.1, (http/1.1)}{0.0.0.0:8080}
+2025-02-04 11:32:18 INFO  hutech.dacn.hospital.Server - Started Server in 2.751 seconds (process running for 3.423)
+2025-02-04 11:32:18 INFO  console - Active Profile: []
+2025-02-04 11:32:43 INFO  o.e.jetty.server.AbstractConnector - Stopped ServerConnector@16da1abc{HTTP/1.1, (http/1.1)}{0.0.0.0:8080}
+2025-02-04 11:32:43 INFO  org.eclipse.jetty.server.Server - Stopped oejs.Server@41eb94bc{STOPPING}[12.0.11,sto=0]
+2025-02-04 11:32:43 INFO  o.e.j.s.h.ContextHandler.application - Destroying Spring FrameworkServlet 'dispatcherServlet'
+2025-02-04 11:32:43 INFO  o.e.j.e.s.ServletContextHandler - Stopped osbwej.JettyEmbeddedWebAppContext@5853ca50{application,/,b=file:/tmp/jetty-docbase.8080.11771772217395876606/,a=AVAILABLE,h=oeje10s.SessionHandler@1a0d96a5{STOPPED}}
