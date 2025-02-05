@@ -25,4 +25,12 @@ public class ApplicationException extends RuntimeException{
     super(message);
     this.errorCode = errorCode;
   }
+
+  public ErrorCode getErrorCode() {
+    return errorCode;
+  }
+
+  public void setErrorCode(ErrorCode errorCode) {
+    this.errorCode = errorCode;
+  }
 }
