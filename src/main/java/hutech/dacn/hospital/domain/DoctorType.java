@@ -5,19 +5,13 @@ import jakarta.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "DiseaseSymptom")
-public class DiseaseSymptom {
+@Table(name = "DoctorType")
+public class DoctorType {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long diseaseSymptomId;
+    private String doctorTypeId;
 
-    @ManyToOne
-    @JoinColumn(name = "diseaseId")
-    private Disease disease;
-
-    @ManyToOne
-    @JoinColumn(name = "symptomId")
-    private Symptom symptom;
+    private String doctorTypeName;
 
     // Audit fields
     private String createUser;
@@ -25,30 +19,20 @@ public class DiseaseSymptom {
     private String updateUser;
     private Date updateDate;
 
-    // Getters and setters
-
-    public Long getDiseaseSymptomId() {
-        return diseaseSymptomId;
+    public String getDoctorTypeId() {
+        return doctorTypeId;
     }
 
-    public void setDiseaseSymptomId(Long diseaseSymptomId) {
-        this.diseaseSymptomId = diseaseSymptomId;
+    public void setDoctorTypeId(String doctorTypeId) {
+        this.doctorTypeId = doctorTypeId;
     }
 
-    public Disease getDisease() {
-        return disease;
+    public String getDoctorTypeName() {
+        return doctorTypeName;
     }
 
-    public void setDisease(Disease disease) {
-        this.disease = disease;
-    }
-
-    public Symptom getSymptom() {
-        return symptom;
-    }
-
-    public void setSymptom(Symptom symptom) {
-        this.symptom = symptom;
+    public void setDoctorTypeName(String doctorTypeName) {
+        this.doctorTypeName = doctorTypeName;
     }
 
     public String getCreateUser() {

@@ -18,6 +18,10 @@ public class PrescriptionDetail {
     @JoinColumn(name = "medicineId")
     private Medicine medicine;
 
+    @ManyToOne
+    @JoinColumn(name = "medicalRecordId")
+    private MedicalRecord medicalRecord;
+
     private int quantity;
     private String unit;
 
@@ -99,5 +103,13 @@ public class PrescriptionDetail {
 
     public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
+    }
+
+    public MedicalRecord getMedicalRecord() {
+        return medicalRecord;
+    }
+
+    public void setMedicalRecord(MedicalRecord medicalRecord) {
+        this.medicalRecord = medicalRecord;
     }
 }

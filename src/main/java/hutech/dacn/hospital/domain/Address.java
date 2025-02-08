@@ -9,14 +9,25 @@ import java.util.Date;
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(length = 30)
     private Long addressId;
 
-    private String streetNumber;
-    private String ward;
+    @Column(length = 50, nullable = true)
+    private String addressNumber;
+
+    @Column(length = 100, nullable = true)
+    private String street;
+
+    @Column(length = 100, nullable = true)
     private String district;
+
+    @Column(length = 100, nullable = true)
+    private String ward;
+
+    @Column(length = 100, nullable = true)
     private String city;
 
-    // Audit fields
+    @Column(length = 30, nullable = true)
     private String createUser;
     private Date createDate;
     private String updateUser;
@@ -24,20 +35,29 @@ public class Address {
 
     // Getters and setters
 
+
+    public String getAddressNumber() {
+        return addressNumber;
+    }
+
+    public void setAddressNumber(String addressNumber) {
+        this.addressNumber = addressNumber;
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
+    }
+
     public Long getAddressId() {
         return addressId;
     }
 
     public void setAddressId(Long addressId) {
         this.addressId = addressId;
-    }
-
-    public String getStreetNumber() {
-        return streetNumber;
-    }
-
-    public void setStreetNumber(String streetNumber) {
-        this.streetNumber = streetNumber;
     }
 
     public String getWard() {

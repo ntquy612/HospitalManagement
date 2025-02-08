@@ -9,14 +9,18 @@ import java.util.Date;
 public class Floor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(length = 30)
     private Long floorId;
 
+    @Column(length = 50, nullable = true, unique = true)
     private String floorName;
 
-    // Audit fields
+    @Column(length = 30, nullable = true)
     private String createUser;
-    private Date createDate;
+
+    @Column(length = 30, nullable = true)
     private String updateUser;
+    private Date createDate;
     private Date updateDate;
 
     // Getters and setters

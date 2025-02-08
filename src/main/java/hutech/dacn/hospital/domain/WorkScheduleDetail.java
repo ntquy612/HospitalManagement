@@ -7,9 +7,6 @@ import java.util.Date;
 @Entity
 @Table(name = "WorkScheduleDetail")
 public class WorkScheduleDetail {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long workScheduleDetailId;
 
     @ManyToOne
     @JoinColumn(name = "workScheduleId")
@@ -19,6 +16,14 @@ public class WorkScheduleDetail {
     @JoinColumn(name = "doctorId")
     private Doctor doctor;
 
+    @ManyToOne
+    @JoinColumn(name = "shiftId")
+    private Shift shift;
+
+    @ManyToOne
+    @JoinColumn(name = "roomId")
+    private Room room;
+
     // Audit fields
     private String createUser;
     private Date createDate;
@@ -26,14 +31,6 @@ public class WorkScheduleDetail {
     private Date updateDate;
 
     // Getters and sett
-
-    public Long getWorkScheduleDetailId() {
-        return workScheduleDetailId;
-    }
-
-    public void setWorkScheduleDetailId(Long workScheduleDetailId) {
-        this.workScheduleDetailId = workScheduleDetailId;
-    }
 
     public WorkSchedule getWorkSchedule() {
         return workSchedule;
@@ -81,5 +78,21 @@ public class WorkScheduleDetail {
 
     public void setUpdateDate(Date updateDate) {
         this.updateDate = updateDate;
+    }
+
+    public Shift getShift() {
+        return shift;
+    }
+
+    public void setShift(Shift shift) {
+        this.shift = shift;
+    }
+
+    public Room getRoom() {
+        return room;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
     }
 }

@@ -1,21 +1,24 @@
 package hutech.dacn.hospital.domain;
 
-import jakarta.persistence.*;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.Table;
 
 import java.util.Date;
-import java.util.List;
 
 @Entity
-@Table(name = "Disease")
-public class Disease {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long diseaseId;
+@Table(name = "SuggestMajor")
+public class SuggestMajor {
 
-    private String diseaseName;
+    @ManyToMany
+    @JoinColumn(name = "majorId")
+    private String MajorId;
 
-    @OneToMany(mappedBy = "disease", cascade = CascadeType.ALL)
-    private List<DiseaseSymptom> diseaseSymptoms;
+    @ManyToMany
+    @JoinColumn(name = "symptomId")
+    private Symptom symptom;
 
     // Audit fields
     private String createUser;
@@ -23,31 +26,20 @@ public class Disease {
     private String updateUser;
     private Date updateDate;
 
-    // Getters and setters
-
-
-    public Long getDiseaseId() {
-        return diseaseId;
+    public String getMajorId() {
+        return MajorId;
     }
 
-    public void setDiseaseId(Long diseaseId) {
-        this.diseaseId = diseaseId;
+    public Symptom getSymptom() {
+        return symptom;
     }
 
-    public String getDiseaseName() {
-        return diseaseName;
+    public void setSymptom(Symptom symptom) {
+        this.symptom = symptom;
     }
 
-    public void setDiseaseName(String diseaseName) {
-        this.diseaseName = diseaseName;
-    }
-
-    public List<DiseaseSymptom> getDiseaseSymptoms() {
-        return diseaseSymptoms;
-    }
-
-    public void setDiseaseSymptoms(List<DiseaseSymptom> diseaseSymptoms) {
-        this.diseaseSymptoms = diseaseSymptoms;
+    public void setMajorId(String majorId) {
+        MajorId = majorId;
     }
 
     public String getCreateUser() {
@@ -82,4 +74,3 @@ public class Disease {
         this.updateDate = updateDate;
     }
 }
-
