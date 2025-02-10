@@ -2,6 +2,7 @@ package hutech.dacn.hospital.domain;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -9,32 +10,34 @@ import java.util.List;
 @Table(name = "MedicalRecord")
 public class MedicalRecord {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long medicalRecordId;
+    @Column(name = "MedicalRecordID", length = 30)
+    private String medicalRecordID;
 
     @ManyToOne
-    @JoinColumn(name = "patientId")
+    @JoinColumn(name = "PatientID", referencedColumnName = "PatientID")
     private Patient patient;
 
+    @Column(name = "Date")
     private Date date;
 
-    @OneToMany(mappedBy = "medicalRecord", cascade = CascadeType.ALL)
-    private List<Prescription> prescriptions;
-
-    // Audit fields
+    @Column(name = "CreateUser", length = 30)
     private String createUser;
-    private Date createDate;
+
+    @Column(name = "CreateDate")
+    private LocalDateTime createDate;
+
+    @Column(name = "UpdateUser", length = 30)
     private String updateUser;
-    private Date updateDate;
 
-    // Getters and setters
+    @Column(name = "UpdateDate")
+    private LocalDateTime updateDate;
 
-    public Long getMedicalRecordId() {
-        return medicalRecordId;
+    public String getMedicalRecordID() {
+        return medicalRecordID;
     }
 
-    public void setMedicalRecordId(Long medicalRecordId) {
-        this.medicalRecordId = medicalRecordId;
+    public void setMedicalRecordID(String medicalRecordID) {
+        this.medicalRecordID = medicalRecordID;
     }
 
     public Patient getPatient() {
@@ -53,14 +56,6 @@ public class MedicalRecord {
         this.date = date;
     }
 
-    public List<Prescription> getPrescriptions() {
-        return prescriptions;
-    }
-
-    public void setPrescriptions(List<Prescription> prescriptions) {
-        this.prescriptions = prescriptions;
-    }
-
     public String getCreateUser() {
         return createUser;
     }
@@ -69,11 +64,11 @@ public class MedicalRecord {
         this.createUser = createUser;
     }
 
-    public Date getCreateDate() {
+    public LocalDateTime getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Date createDate) {
+    public void setCreateDate(LocalDateTime createDate) {
         this.createDate = createDate;
     }
 
@@ -85,11 +80,11 @@ public class MedicalRecord {
         this.updateUser = updateUser;
     }
 
-    public Date getUpdateDate() {
+    public LocalDateTime getUpdateDate() {
         return updateDate;
     }
 
-    public void setUpdateDate(Date updateDate) {
+    public void setUpdateDate(LocalDateTime updateDate) {
         this.updateDate = updateDate;
     }
 }

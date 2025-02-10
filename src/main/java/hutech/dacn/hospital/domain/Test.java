@@ -1,36 +1,42 @@
 package hutech.dacn.hospital.domain;
 
 import jakarta.persistence.*;
-
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table(name = "Test")
 public class Test {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long testId;
 
+    @Id
+    @Column(name = "TestID", length = 30)
+    private String testID;
+
+    @Column(name = "TestName", length = 100, unique = true)
     private String testName;
 
-    @OneToMany(mappedBy = "test", cascade = CascadeType.ALL)
-    private List<TestIssue> testIssues;
+    @Column(name = "Price")
+    private BigDecimal price;
 
-    // Audit fields
+    @Column(name = "CreateUser", length = 30)
     private String createUser;
-    private Date createDate;
+
+    @Column(name = "CreateDate")
+    private LocalDateTime createDate;
+
+    @Column(name = "UpdateUser", length = 30)
     private String updateUser;
-    private Date updateDate;
 
-    // Getters and setters
+    @Column(name = "UpdateDate")
+    private LocalDateTime updateDate;
 
-    public Long getTestId() {
-        return testId;
+    public String getTestID() {
+        return testID;
     }
 
-    public void setTestId(Long testId) {
-        this.testId = testId;
+    public void setTestID(String testID) {
+        this.testID = testID;
     }
 
     public String getTestName() {
@@ -41,12 +47,12 @@ public class Test {
         this.testName = testName;
     }
 
-    public List<TestIssue> getTestIssues() {
-        return testIssues;
+    public BigDecimal getPrice() {
+        return price;
     }
 
-    public void setTestIssues(List<TestIssue> testIssues) {
-        this.testIssues = testIssues;
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 
     public String getCreateUser() {
@@ -57,11 +63,11 @@ public class Test {
         this.createUser = createUser;
     }
 
-    public Date getCreateDate() {
+    public LocalDateTime getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Date createDate) {
+    public void setCreateDate(LocalDateTime createDate) {
         this.createDate = createDate;
     }
 
@@ -73,12 +79,11 @@ public class Test {
         this.updateUser = updateUser;
     }
 
-    public Date getUpdateDate() {
+    public LocalDateTime getUpdateDate() {
         return updateDate;
     }
 
-    public void setUpdateDate(Date updateDate) {
+    public void setUpdateDate(LocalDateTime updateDate) {
         this.updateDate = updateDate;
     }
 }
-

@@ -3,26 +3,18 @@ package hutech.dacn.hospital.domain;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.Date;
-import java.util.List;
 
 @Entity
-@Table(name = "Shift")
-public class Shift {
+@Table(name = "MedicalSpecialty")
+public class MedicalSpecialty {
 
     @Id
-    @Column(name = "ShiftID", length = 30)
-    private String shiftID;
+    @Column(name = "MedicalSpecialtyID", length = 30)
+    private String medicalSpecialtyID;
 
-    @Column(name = "ShiftName", length = 100, unique = true)
-    private String shiftName;
-
-    @Column(name = "StartTime")
-    private LocalTime startTime;
-
-    @Column(name = "EndTime")
-    private LocalTime endTime;
+    @Column(name = "MedicalSpecialtyName", length = 100, unique = true)
+    private String medicalSpecialtyName;
 
     @Column(name = "CreateUser", length = 30)
     private String createUser;
@@ -36,39 +28,20 @@ public class Shift {
     @Column(name = "UpdateDate")
     private LocalDateTime updateDate;
 
-    @OneToMany(mappedBy = "Shift")
-    private List<WorkScheduleDetail> workScheduleDetails;
-
-    public String getShiftID() {
-        return shiftID;
+    public String getMedicalSpecialtyID() {
+        return medicalSpecialtyID;
     }
 
-    public void setShiftID(String shiftID) {
-        this.shiftID = shiftID;
+    public void setMedicalSpecialtyID(String medicalSpecialtyID) {
+        this.medicalSpecialtyID = medicalSpecialtyID;
     }
 
-    public String getShiftName() {
-        return shiftName;
+    public String getMedicalSpecialtyName() {
+        return medicalSpecialtyName;
     }
 
-    public void setShiftName(String shiftName) {
-        this.shiftName = shiftName;
-    }
-
-    public LocalTime getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(LocalTime startTime) {
-        this.startTime = startTime;
-    }
-
-    public LocalTime getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(LocalTime endTime) {
-        this.endTime = endTime;
+    public void setMedicalSpecialtyName(String medicalSpecialtyName) {
+        this.medicalSpecialtyName = medicalSpecialtyName;
     }
 
     public String getCreateUser() {

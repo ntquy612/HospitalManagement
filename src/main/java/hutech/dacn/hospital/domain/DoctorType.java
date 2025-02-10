@@ -2,6 +2,7 @@ package hutech.dacn.hospital.domain;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -9,22 +10,30 @@ import java.util.Date;
 public class DoctorType {
 
     @Id
-    private String doctorTypeId;
+    @Column(name = "DoctorTypeID", length = 30)
+    private String doctorTypeID;
 
+    @Column(name = "DoctorTypeName", length = 100)
     private String doctorTypeName;
 
-    // Audit fields
+    @Column(name = "CreateUser", length = 30)
     private String createUser;
-    private Date createDate;
-    private String updateUser;
-    private Date updateDate;
 
-    public String getDoctorTypeId() {
-        return doctorTypeId;
+    @Column(name = "CreateDate")
+    private LocalDateTime createDate;
+
+    @Column(name = "UpdateUser", length = 30)
+    private String updateUser;
+
+    @Column(name = "UpdateDate")
+    private LocalDateTime updateDate;
+
+    public String getDoctorTypeID() {
+        return doctorTypeID;
     }
 
-    public void setDoctorTypeId(String doctorTypeId) {
-        this.doctorTypeId = doctorTypeId;
+    public void setDoctorTypeID(String doctorTypeID) {
+        this.doctorTypeID = doctorTypeID;
     }
 
     public String getDoctorTypeName() {
@@ -43,11 +52,11 @@ public class DoctorType {
         this.createUser = createUser;
     }
 
-    public Date getCreateDate() {
+    public LocalDateTime getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Date createDate) {
+    public void setCreateDate(LocalDateTime createDate) {
         this.createDate = createDate;
     }
 
@@ -59,11 +68,11 @@ public class DoctorType {
         this.updateUser = updateUser;
     }
 
-    public Date getUpdateDate() {
+    public LocalDateTime getUpdateDate() {
         return updateDate;
     }
 
-    public void setUpdateDate(Date updateDate) {
+    public void setUpdateDate(LocalDateTime updateDate) {
         this.updateDate = updateDate;
     }
 }

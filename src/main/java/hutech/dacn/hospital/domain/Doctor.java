@@ -2,43 +2,103 @@ package hutech.dacn.hospital.domain;
 
 import jakarta.persistence.*;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
 @Table(name = "Doctor")
 public class Doctor {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long doctorId;
-
-    private String name;
-    private String gender;
-    private String phone;
-    private String email;
-    private String identityIdentification;
+    @Column(name = "DoctorID", length = 30)
+    private String doctorID;
 
     @ManyToOne
-    @JoinColumn(name = "majorId")
-    private Major major;
+    @JoinColumn(name = "DoctorTypeID", referencedColumnName = "DoctorTypeID")
+    private DoctorType doctorType;
 
-    @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL)
+    @ManyToOne
+    @JoinColumn(name = "MedicalSpecialtyID", referencedColumnName = "MedicalSpecialtyID")
+    private MedicalSpecialty medicalSpecialty;
+
+    @ManyToOne
+    @JoinColumn(name = "AccountID", referencedColumnName = "AccountID")
+    private Account account;
+
+    @ManyToOne
+    @JoinColumn(name = "AddressID", referencedColumnName = "AddressID")
+    private Address address;
+
+    @Column(name = "Name", length = 100)
+    private String name;
+
+    @Column(name = "Gender", length = 100)
+    private String gender;
+
+    @Column(name = "Phone", length = 100)
+    private String phone;
+
+    @Column(name = "Email", length = 100)
+    private String gmail;
+
+    @Column(name = "IdentityID", length = 100, unique = true)
+    private String identityID;
+
+    @Column(name = "Status", length = 100)
+    private String status;
+
+    @Column(name = "CreateUser", length = 30)
+    private String createUser;
+
+    @Column(name = "CreateDate")
+    private LocalDateTime createDate;
+
+    @Column(name = "UpdateUser", length = 30)
+    private String updateUser;
+
+    @Column(name = "UpdateDate")
+    private LocalDateTime updateDate;
+
+    @OneToMany(mappedBy = "Doctor")
     private List<WorkScheduleDetail> workScheduleDetails;
 
-    // Audit fields
-    private String createUser;
-    private Date createDate;
-    private String updateUser;
-    private Date updateDate;
-
-    // Getters and setters
-
-    public Long getDoctorId() {
-        return doctorId;
+    public String getDoctorID() {
+        return doctorID;
     }
 
-    public void setDoctorId(Long doctorId) {
-        this.doctorId = doctorId;
+    public void setDoctorID(String doctorID) {
+        this.doctorID = doctorID;
+    }
+
+    public DoctorType getDoctorType() {
+        return doctorType;
+    }
+
+    public void setDoctorType(DoctorType doctorType) {
+        this.doctorType = doctorType;
+    }
+
+    public MedicalSpecialty getMedicalSpecialty() {
+        return medicalSpecialty;
+    }
+
+    public void setMedicalSpecialty(MedicalSpecialty medicalSpecialty) {
+        this.medicalSpecialty = medicalSpecialty;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public String getName() {
@@ -65,36 +125,28 @@ public class Doctor {
         this.phone = phone;
     }
 
-    public String getEmail() {
-        return email;
+    public String getGmail() {
+        return gmail;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setGmail(String gmail) {
+        this.gmail = gmail;
     }
 
-    public String getIdentityIdentification() {
-        return identityIdentification;
+    public String getIdentityID() {
+        return identityID;
     }
 
-    public void setIdentityIdentification(String identityIdentification) {
-        this.identityIdentification = identityIdentification;
+    public void setIdentityID(String identityID) {
+        this.identityID = identityID;
     }
 
-    public Major getMajor() {
-        return major;
+    public String getStatus() {
+        return status;
     }
 
-    public void setMajor(Major major) {
-        this.major = major;
-    }
-
-    public List<WorkScheduleDetail> getWorkScheduleDetails() {
-        return workScheduleDetails;
-    }
-
-    public void setWorkScheduleDetails(List<WorkScheduleDetail> workScheduleDetails) {
-        this.workScheduleDetails = workScheduleDetails;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getCreateUser() {
@@ -105,11 +157,11 @@ public class Doctor {
         this.createUser = createUser;
     }
 
-    public Date getCreateDate() {
+    public LocalDateTime getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Date createDate) {
+    public void setCreateDate(LocalDateTime createDate) {
         this.createDate = createDate;
     }
 
@@ -121,11 +173,11 @@ public class Doctor {
         this.updateUser = updateUser;
     }
 
-    public Date getUpdateDate() {
+    public LocalDateTime getUpdateDate() {
         return updateDate;
     }
 
-    public void setUpdateDate(Date updateDate) {
+    public void setUpdateDate(LocalDateTime updateDate) {
         this.updateDate = updateDate;
     }
 }

@@ -1,43 +1,50 @@
 package hutech.dacn.hospital.domain;
 
 import jakarta.persistence.*;
+
+import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "Room")
 public class Room {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long roomId;
 
-    private String roomName;
+    @Id
+    @Column(name = "RoomID", length = 30, unique = true)
+    private String roomID;
 
     @ManyToOne
-    @JoinColumn(name = "floorId")
+    @JoinColumn(name = "FloorID", referencedColumnName = "FloorID")
     private Floor floor;
 
-    // Audit fields
+    @Column(name = "RoomName", length = 100, unique = true)
+    private String roomName;
+
+    @Column(name = "Status", length = 30)
+    private String status;
+
+    @Column(name = "CreateUser", length = 30)
     private String createUser;
-    private Date createDate;
+
+    @Column(name = "CreateDate")
+    private LocalDateTime createDate;
+
+    @Column(name = "UpdateUser", length = 30)
     private String updateUser;
-    private Date updateDate;
 
-    // Getters and setters
+    @Column(name = "UpdateDate")
+    private LocalDateTime updateDate;
 
-    public Long getRoomId() {
-        return roomId;
+    @OneToMany(mappedBy = "Room")
+    private List<WorkScheduleDetail> workScheduleDetails;
+
+    public String getRoomID() {
+        return roomID;
     }
 
-    public void setRoomId(Long roomId) {
-        this.roomId = roomId;
-    }
-
-    public String getRoomName() {
-        return roomName;
-    }
-
-    public void setRoomName(String roomName) {
-        this.roomName = roomName;
+    public void setRoomID(String roomID) {
+        this.roomID = roomID;
     }
 
     public Floor getFloor() {
@@ -48,6 +55,22 @@ public class Room {
         this.floor = floor;
     }
 
+    public String getRoomName() {
+        return roomName;
+    }
+
+    public void setRoomName(String roomName) {
+        this.roomName = roomName;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public String getCreateUser() {
         return createUser;
     }
@@ -56,11 +79,11 @@ public class Room {
         this.createUser = createUser;
     }
 
-    public Date getCreateDate() {
+    public LocalDateTime getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Date createDate) {
+    public void setCreateDate(LocalDateTime createDate) {
         this.createDate = createDate;
     }
 
@@ -72,11 +95,11 @@ public class Room {
         this.updateUser = updateUser;
     }
 
-    public Date getUpdateDate() {
+    public LocalDateTime getUpdateDate() {
         return updateDate;
     }
 
-    public void setUpdateDate(Date updateDate) {
+    public void setUpdateDate(LocalDateTime updateDate) {
         this.updateDate = updateDate;
     }
 }

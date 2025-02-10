@@ -2,39 +2,45 @@ package hutech.dacn.hospital.domain;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
 @Table(name = "MedicineType")
 public class MedicineType {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long medicineTypeId;
+    @Column(name = "MedicinesTypeID", length = 30)
+    private String medicinesTypeID;
 
-    private String medicineTypeName;
+    @Column(name = "MedicinesTypeName", length = 50, unique = true)
+    private String medicinesTypeName;
 
-    // Audit fields
+    @Column(name = "CreateUser", length = 30)
     private String createUser;
-    private Date createDate;
+
+    @Column(name = "CreateDate")
+    private LocalDateTime createDate;
+
+    @Column(name = "UpdateUser", length = 30)
     private String updateUser;
-    private Date updateDate;
 
-    // Getters and setters
+    @Column(name = "UpdateDate")
+    private LocalDateTime updateDate;
 
-    public Long getMedicineTypeId() {
-        return medicineTypeId;
+    public String getMedicinesTypeID() {
+        return medicinesTypeID;
     }
 
-    public void setMedicineTypeId(Long medicineTypeId) {
-        this.medicineTypeId = medicineTypeId;
+    public void setMedicinesTypeID(String medicinesTypeID) {
+        this.medicinesTypeID = medicinesTypeID;
     }
 
-    public String getMedicineTypeName() {
-        return medicineTypeName;
+    public String getMedicinesTypeName() {
+        return medicinesTypeName;
     }
 
-    public void setMedicineTypeName(String medicineTypeName) {
-        this.medicineTypeName = medicineTypeName;
+    public void setMedicinesTypeName(String medicinesTypeName) {
+        this.medicinesTypeName = medicinesTypeName;
     }
 
     public String getCreateUser() {
@@ -45,11 +51,11 @@ public class MedicineType {
         this.createUser = createUser;
     }
 
-    public Date getCreateDate() {
+    public LocalDateTime getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Date createDate) {
+    public void setCreateDate(LocalDateTime createDate) {
         this.createDate = createDate;
     }
 
@@ -61,11 +67,11 @@ public class MedicineType {
         this.updateUser = updateUser;
     }
 
-    public Date getUpdateDate() {
+    public LocalDateTime getUpdateDate() {
         return updateDate;
     }
 
-    public void setUpdateDate(Date updateDate) {
+    public void setUpdateDate(LocalDateTime updateDate) {
         this.updateDate = updateDate;
     }
 }
