@@ -2,6 +2,7 @@ package hutech.dacn.hospital.domain;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -9,42 +10,34 @@ import java.util.List;
 @Table(name = "Prescription")
 public class Prescription {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long prescriptionId;
+    @Column(name = "PrescriptionID", length = 30)
+    private String prescriptionID;
 
     @ManyToOne
-    @JoinColumn(name = "doctorId")
-    private Doctor doctor;
-
-    @ManyToOne
-    @JoinColumn(name = "medicalRecordId")
+    @JoinColumn(name = "MedicalRecordID", referencedColumnName = "MedicalRecordID")
     private MedicalRecord medicalRecord;
 
-    @OneToMany(mappedBy = "prescription", cascade = CascadeType.ALL)
-    private List<PrescriptionDetail> prescriptionDetails;
+    @Column(name = "Note", length = 1000)
+    private String note;
 
-    // Audit fields
+    @Column(name = "CreateUser", length = 30)
     private String createUser;
-    private Date createDate;
+
+    @Column(name = "CreateDate")
+    private LocalDateTime createDate;
+
+    @Column(name = "UpdateUser", length = 30)
     private String updateUser;
-    private Date updateDate;
 
-    // Getters and setters
+    @Column(name = "UpdateDate")
+    private LocalDateTime updateDate;
 
-    public Long getPrescriptionId() {
-        return prescriptionId;
+    public String getPrescriptionID() {
+        return prescriptionID;
     }
 
-    public void setPrescriptionId(Long prescriptionId) {
-        this.prescriptionId = prescriptionId;
-    }
-
-    public Doctor getDoctor() {
-        return doctor;
-    }
-
-    public void setDoctor(Doctor doctor) {
-        this.doctor = doctor;
+    public void setPrescriptionID(String prescriptionID) {
+        this.prescriptionID = prescriptionID;
     }
 
     public MedicalRecord getMedicalRecord() {
@@ -55,12 +48,12 @@ public class Prescription {
         this.medicalRecord = medicalRecord;
     }
 
-    public List<PrescriptionDetail> getPrescriptionDetails() {
-        return prescriptionDetails;
+    public String getNote() {
+        return note;
     }
 
-    public void setPrescriptionDetails(List<PrescriptionDetail> prescriptionDetails) {
-        this.prescriptionDetails = prescriptionDetails;
+    public void setNote(String note) {
+        this.note = note;
     }
 
     public String getCreateUser() {
@@ -71,11 +64,11 @@ public class Prescription {
         this.createUser = createUser;
     }
 
-    public Date getCreateDate() {
+    public LocalDateTime getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Date createDate) {
+    public void setCreateDate(LocalDateTime createDate) {
         this.createDate = createDate;
     }
 
@@ -87,11 +80,11 @@ public class Prescription {
         this.updateUser = updateUser;
     }
 
-    public Date getUpdateDate() {
+    public LocalDateTime getUpdateDate() {
         return updateDate;
     }
 
-    public void setUpdateDate(Date updateDate) {
+    public void setUpdateDate(LocalDateTime updateDate) {
         this.updateDate = updateDate;
     }
 }
