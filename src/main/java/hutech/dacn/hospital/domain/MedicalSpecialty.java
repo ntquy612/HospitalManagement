@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "MedicalSpecialty")
@@ -27,6 +28,17 @@ public class MedicalSpecialty {
 
     @Column(name = "UpdateDate")
     private LocalDateTime updateDate;
+
+    @OneToMany(mappedBy = "medicalSpecialty")
+    private List<SuggestMedicalSpecialty> suggestMedicalSpecialties;
+
+    public List<SuggestMedicalSpecialty> getSuggestMedicalSpecialties() {
+        return suggestMedicalSpecialties;
+    }
+
+    public void setSuggestMedicalSpecialties(List<SuggestMedicalSpecialty> suggestMedicalSpecialties) {
+        this.suggestMedicalSpecialties = suggestMedicalSpecialties;
+    }
 
     public String getMedicalSpecialtyID() {
         return medicalSpecialtyID;

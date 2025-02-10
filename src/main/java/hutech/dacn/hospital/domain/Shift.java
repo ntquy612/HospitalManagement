@@ -36,7 +36,7 @@ public class Shift {
     @Column(name = "UpdateDate")
     private LocalDateTime updateDate;
 
-    @OneToMany(mappedBy = "Shift")
+    @OneToMany(mappedBy = "shift")
     private List<WorkScheduleDetail> workScheduleDetails;
 
     public String getShiftID() {

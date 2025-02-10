@@ -33,8 +33,8 @@ public class AppointmentTime {
     @Column(name = "UpdateDate")
     private LocalDateTime updateDate;
 
-    @OneToMany(mappedBy = "AppointmentTime")
-    private List<MedicalRecordDetail> medicalRecordDetails;
+    @OneToMany(mappedBy = "appointmentTime")
+    private List<MedicalRecordDetail> appointmentTimeDetails;
 
     public String getAppointmentTimeID() {
         return appointmentTimeID;
@@ -92,11 +92,11 @@ public class AppointmentTime {
         this.updateDate = updateDate;
     }
 
-    public List<MedicalRecordDetail> getMedicalRecordDetails() {
-        return medicalRecordDetails;
+    public List<MedicalRecordDetail> getAppointmentTimeDetails() {
+        return appointmentTimeDetails;
     }
 
-    public void setMedicalRecordDetails(List<MedicalRecordDetail> medicalRecordDetails) {
-        this.medicalRecordDetails = medicalRecordDetails;
+    public void setAppointmentTimeDetails(List<MedicalRecordDetail> appointmentTimeDetails) {
+        this.appointmentTimeDetails = appointmentTimeDetails;
     }
 }

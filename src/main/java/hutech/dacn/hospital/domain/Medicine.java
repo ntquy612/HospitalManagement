@@ -35,7 +35,7 @@ public class Medicine {
     @Column(name = "updateDate")
     private LocalDateTime updateDate;
 
-    @OneToMany(mappedBy = "medicines")
+    @OneToMany(mappedBy = "medicine")
     private List<MedicinesDetail> medicinesDetails;
 
     public List<MedicinesDetail> getMedicinesDetails() {

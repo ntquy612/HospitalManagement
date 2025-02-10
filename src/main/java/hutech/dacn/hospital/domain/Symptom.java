@@ -3,11 +3,11 @@ package hutech.dacn.hospital.domain;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
-import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "Symptoms")
-public class Symptoms {
+public class Symptom {
 
     @Id
     @Column(name = "SymptomsID", length = 30)
@@ -27,6 +27,9 @@ public class Symptoms {
 
     @Column(name = "UpdateDate")
     private LocalDateTime updateDate;
+
+    @OneToMany(mappedBy = "symptoms")
+    private List<SuggestMedicalSpecialty> suggestMedicalSpecialties;
 
     public String getSymptomsID() {
         return symptomsID;
@@ -74,5 +77,13 @@ public class Symptoms {
 
     public void setUpdateDate(LocalDateTime updateDate) {
         this.updateDate = updateDate;
+    }
+
+    public List<SuggestMedicalSpecialty> getSuggestMedicalSpecialties() {
+        return suggestMedicalSpecialties;
+    }
+
+    public void setSuggestMedicalSpecialties(List<SuggestMedicalSpecialty> suggestMedicalSpecialties) {
+        this.suggestMedicalSpecialties = suggestMedicalSpecialties;
     }
 }

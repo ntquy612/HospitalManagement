@@ -32,6 +32,17 @@ public class Prescription {
     @Column(name = "UpdateDate")
     private LocalDateTime updateDate;
 
+    @OneToMany(mappedBy = "prescription")
+    private List<PrescriptionDetail> prescriptionDetails;
+
+    public List<PrescriptionDetail> getPrescriptionDetails() {
+        return prescriptionDetails;
+    }
+
+    public void setPrescriptionDetails(List<PrescriptionDetail> prescriptionDetails) {
+        this.prescriptionDetails = prescriptionDetails;
+    }
+
     public String getPrescriptionID() {
         return prescriptionID;
     }
@@ -87,4 +98,6 @@ public class Prescription {
     public void setUpdateDate(LocalDateTime updateDate) {
         this.updateDate = updateDate;
     }
+
+
 }

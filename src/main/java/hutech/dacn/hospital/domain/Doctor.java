@@ -38,7 +38,7 @@ public class Doctor {
     private String phone;
 
     @Column(name = "Email", length = 100)
-    private String gmail;
+    private String mail;
 
     @Column(name = "IdentityID", length = 100, unique = true)
     private String identityID;
@@ -58,7 +58,7 @@ public class Doctor {
     @Column(name = "UpdateDate")
     private LocalDateTime updateDate;
 
-    @OneToMany(mappedBy = "Doctor")
+    @OneToMany(mappedBy = "doctor")
     private List<WorkScheduleDetail> workScheduleDetails;
 
     public String getDoctorID() {
@@ -126,11 +126,11 @@ public class Doctor {
     }
 
     public String getGmail() {
-        return gmail;
+        return mail;
     }
 
     public void setGmail(String gmail) {
-        this.gmail = gmail;
+        this.mail = gmail;
     }
 
     public String getIdentityID() {

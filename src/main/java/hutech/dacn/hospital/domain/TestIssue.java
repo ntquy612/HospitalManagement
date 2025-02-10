@@ -5,6 +5,7 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "TestIssue")
@@ -38,6 +39,17 @@ public class TestIssue {
 
     @Column(name = "UpdateDate")
     private LocalDateTime updateDate;
+
+    @OneToMany(mappedBy = "testIssue")
+    private List<TestIssueDetail> testIssueDetails;
+
+    public List<TestIssueDetail> getTestIssueDetails() {
+        return testIssueDetails;
+    }
+
+    public void setTestIssueDetails(List<TestIssueDetail> testIssueDetails) {
+        this.testIssueDetails = testIssueDetails;
+    }
 
     public String getTestIssuesID() {
         return testIssuesID;

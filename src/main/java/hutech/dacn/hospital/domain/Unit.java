@@ -29,7 +29,7 @@ public class Unit {
     @Column(name = "UpdateDate")
     private LocalDateTime updateDate;
 
-    @OneToMany(mappedBy = "Unit")
+    @OneToMany(mappedBy = "unit")
     private List<MedicinesDetail> medicinesDetails;
 
     public List<MedicinesDetail> getMedicinesDetails() {

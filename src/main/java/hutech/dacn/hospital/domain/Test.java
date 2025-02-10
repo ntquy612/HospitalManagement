@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "Test")
@@ -30,6 +31,17 @@ public class Test {
 
     @Column(name = "UpdateDate")
     private LocalDateTime updateDate;
+
+    @OneToMany(mappedBy = "test")
+    private List<TestIssueDetail> testIssueDetails;
+
+    public List<TestIssueDetail> getTestIssueDetails() {
+        return testIssueDetails;
+    }
+
+    public void setTestIssueDetails(List<TestIssueDetail> testIssueDetails) {
+        this.testIssueDetails = testIssueDetails;
+    }
 
     public String getTestID() {
         return testID;

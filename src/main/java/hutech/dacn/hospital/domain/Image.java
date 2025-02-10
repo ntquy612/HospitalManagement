@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Date;
 import java.sql.Blob; // Import for Blob
+import java.util.List;
 
 @Entity
 @Table(name = "Image")
@@ -29,6 +30,17 @@ public class Image {
 
     @Column(name = "UpdateDate")
     private LocalDateTime updateDate;
+
+    @OneToMany(mappedBy = "imageID")
+    private List<TestResultImage> testResultImages;
+
+    public List<TestResultImage> getTestResultImages() {
+        return testResultImages;
+    }
+
+    public void setTestResultImages(List<TestResultImage> testResultImages) {
+        this.testResultImages = testResultImages;
+    }
 
     public String getImageID() {
         return imageID;

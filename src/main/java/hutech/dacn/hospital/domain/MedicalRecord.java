@@ -32,6 +32,9 @@ public class MedicalRecord {
     @Column(name = "UpdateDate")
     private LocalDateTime updateDate;
 
+    @OneToMany(mappedBy = "medicalRecord")
+    private List<MedicalRecordDetail> medicalRecordDetails;
+
     public String getMedicalRecordID() {
         return medicalRecordID;
     }
