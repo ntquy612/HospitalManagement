@@ -2,38 +2,50 @@ package hutech.dacn.hospital.domain;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "WorkScheduleDetail")
 public class WorkScheduleDetail {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long workScheduleDetailId;
-
     @ManyToOne
-    @JoinColumn(name = "workScheduleId")
+    @JoinColumn(name = "WorkScheduleID", referencedColumnName = "WorkScheduleID")
     private WorkSchedule workSchedule;
 
+    @Id
     @ManyToOne
-    @JoinColumn(name = "doctorId")
+    @JoinColumn(name = "DoctorID", referencedColumnName = "DoctorID")
     private Doctor doctor;
 
-    // Audit fields
+    @Id
+    @ManyToOne
+    @JoinColumn(name = "ShiftID", referencedColumnName = "ShiftID")
+    private Shift shift;
+
+    @Id
+    @ManyToOne
+    @JoinColumn(name = "RoomID", referencedColumnName = "RoomID")
+    private Room room;
+
+    @Column(name = "Status", length = 30)
+    private String status;
+
+    @Column(name = "CreateUser", length = 30)
     private String createUser;
-    private Date createDate;
+
+    @Column(name = "CreateDate")
+    private LocalDateTime createDate;
+
+    @Column(name = "UpdateUser", length = 30)
     private String updateUser;
-    private Date updateDate;
 
-    // Getters and sett
+    @Column(name = "UpdateDate")
+    private LocalDateTime updateDate;
 
-    public Long getWorkScheduleDetailId() {
-        return workScheduleDetailId;
-    }
-
-    public void setWorkScheduleDetailId(Long workScheduleDetailId) {
-        this.workScheduleDetailId = workScheduleDetailId;
-    }
+    @OneToMany(mappedBy = "WorkScheduleDetail")
+    private List<MedicalRecordDetail> medicalRecordDetails;
 
     public WorkSchedule getWorkSchedule() {
         return workSchedule;
@@ -51,6 +63,30 @@ public class WorkScheduleDetail {
         this.doctor = doctor;
     }
 
+    public Shift getShift() {
+        return shift;
+    }
+
+    public void setShift(Shift shift) {
+        this.shift = shift;
+    }
+
+    public Room getRoom() {
+        return room;
+    }
+
+    public void setRoom(Room room) {
+        this.room = room;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
     public String getCreateUser() {
         return createUser;
     }
@@ -59,11 +95,11 @@ public class WorkScheduleDetail {
         this.createUser = createUser;
     }
 
-    public Date getCreateDate() {
+    public LocalDateTime getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Date createDate) {
+    public void setCreateDate(LocalDateTime createDate) {
         this.createDate = createDate;
     }
 
@@ -75,11 +111,19 @@ public class WorkScheduleDetail {
         this.updateUser = updateUser;
     }
 
-    public Date getUpdateDate() {
+    public LocalDateTime getUpdateDate() {
         return updateDate;
     }
 
-    public void setUpdateDate(Date updateDate) {
+    public void setUpdateDate(LocalDateTime updateDate) {
         this.updateDate = updateDate;
+    }
+
+    public List<MedicalRecordDetail> getMedicalRecordDetails() {
+        return medicalRecordDetails;
+    }
+
+    public void setMedicalRecordDetails(List<MedicalRecordDetail> medicalRecordDetails) {
+        this.medicalRecordDetails = medicalRecordDetails;
     }
 }

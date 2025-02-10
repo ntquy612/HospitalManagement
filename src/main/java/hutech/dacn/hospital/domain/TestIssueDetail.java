@@ -2,47 +2,47 @@ package hutech.dacn.hospital.domain;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "TestIssuesDetail")
 public class TestIssueDetail {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     @ManyToOne
-    @JoinColumn(name = "testIssuesId")
-    private TestIssue testIssues;
+    @JoinColumn(name = "TestIssuesID", referencedColumnName = "TestIssuesID")
+    private TestIssue testIssue;
 
+    @Id
     @ManyToOne
-    @JoinColumn(name = "testId")
+    @JoinColumn(name = "TestID", referencedColumnName = "TestID")
     private Test test;
 
-    private String status;
+    @Column(name = "Status", length = 30)
+    private String Status;
 
-    // Audit fields
+    @Column(name = "CreateUser", length = 30)
     private String createUser;
-    private Date createDate;
+
+    @Column(name = "CreateDate")
+    private LocalDateTime createDate;
+
+    @Column(name = "UpdateUser", length = 30)
     private String updateUser;
-    private Date updateDate;
 
-    // Getters and setters
+    @Column(name = "UpdateDate")
+    private LocalDateTime updateDate;
 
-    public Long getId() {
-        return id;
+    @OneToMany(mappedBy = "TestIssuesDetail")
+    private List<MedicinesDetail> medicinesDetails;
+
+    public TestIssue getTestIssue() {
+        return testIssue;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public TestIssue getTestIssues() {
-        return testIssues;
-    }
-
-    public void setTestIssues(TestIssue testIssues) {
-        this.testIssues = testIssues;
+    public void setTestIssue(TestIssue testIssue) {
+        this.testIssue = testIssue;
     }
 
     public Test getTest() {
@@ -54,11 +54,11 @@ public class TestIssueDetail {
     }
 
     public String getStatus() {
-        return status;
+        return Status;
     }
 
     public void setStatus(String status) {
-        this.status = status;
+        Status = status;
     }
 
     public String getCreateUser() {
@@ -69,11 +69,11 @@ public class TestIssueDetail {
         this.createUser = createUser;
     }
 
-    public Date getCreateDate() {
+    public LocalDateTime getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Date createDate) {
+    public void setCreateDate(LocalDateTime createDate) {
         this.createDate = createDate;
     }
 
@@ -85,11 +85,11 @@ public class TestIssueDetail {
         this.updateUser = updateUser;
     }
 
-    public Date getUpdateDate() {
+    public LocalDateTime getUpdateDate() {
         return updateDate;
     }
 
-    public void setUpdateDate(Date updateDate) {
+    public void setUpdateDate(LocalDateTime updateDate) {
         this.updateDate = updateDate;
     }
 }

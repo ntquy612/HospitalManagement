@@ -2,43 +2,46 @@ package hutech.dacn.hospital.domain;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "AppointmentTime")
 public class AppointmentTime {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long appointmentTimeId;
 
-    private Date date;
+    @Id
+    @Column(name = "AppointmentTimeID", length = 30, unique = true)
+    private String appointmentTimeID;
 
     @ManyToOne
-    @JoinColumn(name = "shiftId")
+    @JoinColumn(name = "ShiftID", referencedColumnName = "ShiftID")
     private Shift shift;
 
-    // Audit fields
+    @Column(name = "Time")
+    private LocalDateTime time;
+
+    @Column(name = "CreateUser", length = 30)
     private String createUser;
-    private Date createDate;
+
+    @Column(name = "CreateDate")
+    private LocalDateTime createDate;
+
+    @Column(name = "UpdateUser", length = 30)
     private String updateUser;
-    private Date updateDate;
 
-    // Getters and setters
+    @Column(name = "UpdateDate")
+    private LocalDateTime updateDate;
 
-    public Long getAppointmentTimeId() {
-        return appointmentTimeId;
+    @OneToMany(mappedBy = "AppointmentTime")
+    private List<MedicalRecordDetail> medicalRecordDetails;
+
+    public String getAppointmentTimeID() {
+        return appointmentTimeID;
     }
 
-    public void setAppointmentTimeId(Long appointmentTimeId) {
-        this.appointmentTimeId = appointmentTimeId;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
+    public void setAppointmentTimeID(String appointmentTimeID) {
+        this.appointmentTimeID = appointmentTimeID;
     }
 
     public Shift getShift() {
@@ -49,6 +52,14 @@ public class AppointmentTime {
         this.shift = shift;
     }
 
+    public LocalDateTime getTime() {
+        return time;
+    }
+
+    public void setTime(LocalDateTime time) {
+        this.time = time;
+    }
+
     public String getCreateUser() {
         return createUser;
     }
@@ -57,11 +68,11 @@ public class AppointmentTime {
         this.createUser = createUser;
     }
 
-    public Date getCreateDate() {
+    public LocalDateTime getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Date createDate) {
+    public void setCreateDate(LocalDateTime createDate) {
         this.createDate = createDate;
     }
 
@@ -73,11 +84,19 @@ public class AppointmentTime {
         this.updateUser = updateUser;
     }
 
-    public Date getUpdateDate() {
+    public LocalDateTime getUpdateDate() {
         return updateDate;
     }
 
-    public void setUpdateDate(Date updateDate) {
+    public void setUpdateDate(LocalDateTime updateDate) {
         this.updateDate = updateDate;
+    }
+
+    public List<MedicalRecordDetail> getMedicalRecordDetails() {
+        return medicalRecordDetails;
+    }
+
+    public void setMedicalRecordDetails(List<MedicalRecordDetail> medicalRecordDetails) {
+        this.medicalRecordDetails = medicalRecordDetails;
     }
 }

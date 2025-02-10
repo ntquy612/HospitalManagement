@@ -2,31 +2,38 @@ package hutech.dacn.hospital.domain;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
 @Table(name = "Floor")
 public class Floor {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long floorId;
 
+    @Id
+    @Column(name = "FloorID", length = 30)
+    private String floorID;
+
+    @Column(name = "FloorName", length = 50, unique = true)
     private String floorName;
 
-    // Audit fields
+    @Column(name = "CreateUser", length = 30)
     private String createUser;
-    private Date createDate;
+
+    @Column(name = "CreateDate")
+    private LocalDateTime createDate;
+
+    @Column(name = "UpdateUser", length = 30)
     private String updateUser;
-    private Date updateDate;
 
-    // Getters and setters
+    @Column(name = "UpdateDate")
+    private LocalDateTime updateDate;
 
-    public Long getFloorId() {
-        return floorId;
+    public String getFloorID() {
+        return floorID;
     }
 
-    public void setFloorId(Long floorId) {
-        this.floorId = floorId;
+    public void setFloorID(String floorID) {
+        this.floorID = floorID;
     }
 
     public String getFloorName() {
@@ -45,11 +52,11 @@ public class Floor {
         this.createUser = createUser;
     }
 
-    public Date getCreateDate() {
+    public LocalDateTime getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Date createDate) {
+    public void setCreateDate(LocalDateTime createDate) {
         this.createDate = createDate;
     }
 
@@ -61,12 +68,11 @@ public class Floor {
         this.updateUser = updateUser;
     }
 
-    public Date getUpdateDate() {
+    public LocalDateTime getUpdateDate() {
         return updateDate;
     }
 
-    public void setUpdateDate(Date updateDate) {
+    public void setUpdateDate(LocalDateTime updateDate) {
         this.updateDate = updateDate;
     }
 }
-

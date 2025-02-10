@@ -3,26 +3,18 @@ package hutech.dacn.hospital.domain;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.Date;
-import java.util.List;
 
 @Entity
-@Table(name = "Shift")
-public class Shift {
+@Table(name = "DoctorType")
+public class DoctorType {
 
     @Id
-    @Column(name = "ShiftID", length = 30)
-    private String shiftID;
+    @Column(name = "DoctorTypeID", length = 30)
+    private String doctorTypeID;
 
-    @Column(name = "ShiftName", length = 100, unique = true)
-    private String shiftName;
-
-    @Column(name = "StartTime")
-    private LocalTime startTime;
-
-    @Column(name = "EndTime")
-    private LocalTime endTime;
+    @Column(name = "DoctorTypeName", length = 100)
+    private String doctorTypeName;
 
     @Column(name = "CreateUser", length = 30)
     private String createUser;
@@ -36,39 +28,20 @@ public class Shift {
     @Column(name = "UpdateDate")
     private LocalDateTime updateDate;
 
-    @OneToMany(mappedBy = "Shift")
-    private List<WorkScheduleDetail> workScheduleDetails;
-
-    public String getShiftID() {
-        return shiftID;
+    public String getDoctorTypeID() {
+        return doctorTypeID;
     }
 
-    public void setShiftID(String shiftID) {
-        this.shiftID = shiftID;
+    public void setDoctorTypeID(String doctorTypeID) {
+        this.doctorTypeID = doctorTypeID;
     }
 
-    public String getShiftName() {
-        return shiftName;
+    public String getDoctorTypeName() {
+        return doctorTypeName;
     }
 
-    public void setShiftName(String shiftName) {
-        this.shiftName = shiftName;
-    }
-
-    public LocalTime getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(LocalTime startTime) {
-        this.startTime = startTime;
-    }
-
-    public LocalTime getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(LocalTime endTime) {
-        this.endTime = endTime;
+    public void setDoctorTypeName(String doctorTypeName) {
+        this.doctorTypeName = doctorTypeName;
     }
 
     public String getCreateUser() {

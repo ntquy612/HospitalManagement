@@ -2,31 +2,50 @@ package hutech.dacn.hospital.domain;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "Unit")
 public class Unit {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long unitId;
 
+    @Id
+    @Column(name = "UnitID", length = 30)
+    private String unitID;
+
+    @Column(name = "UnitName", length = 100, unique = true)
     private String unitName;
 
-    // Audit fields
+    @Column(name = "CreateUser", length = 30)
     private String createUser;
-    private Date createDate;
+
+    @Column(name = "CreateDate")
+    private LocalDateTime createDate;
+
+    @Column(name = "UpdateUser", length = 30)
     private String updateUser;
-    private Date updateDate;
 
-    // Getters and setters
+    @Column(name = "UpdateDate")
+    private LocalDateTime updateDate;
 
-    public Long getUnitId() {
-        return unitId;
+    @OneToMany(mappedBy = "Unit")
+    private List<MedicinesDetail> medicinesDetails;
+
+    public List<MedicinesDetail> getMedicinesDetails() {
+        return medicinesDetails;
     }
 
-    public void setUnitId(Long unitId) {
-        this.unitId = unitId;
+    public void setMedicinesDetails(List<MedicinesDetail> medicinesDetails) {
+        this.medicinesDetails = medicinesDetails;
+    }
+
+    public String getUnitID() {
+        return unitID;
+    }
+
+    public void setUnitID(String unitID) {
+        this.unitID = unitID;
     }
 
     public String getUnitName() {
@@ -45,11 +64,11 @@ public class Unit {
         this.createUser = createUser;
     }
 
-    public Date getCreateDate() {
+    public LocalDateTime getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Date createDate) {
+    public void setCreateDate(LocalDateTime createDate) {
         this.createDate = createDate;
     }
 
@@ -61,11 +80,11 @@ public class Unit {
         this.updateUser = updateUser;
     }
 
-    public Date getUpdateDate() {
+    public LocalDateTime getUpdateDate() {
         return updateDate;
     }
 
-    public void setUpdateDate(Date updateDate) {
+    public void setUpdateDate(LocalDateTime updateDate) {
         this.updateDate = updateDate;
     }
 }

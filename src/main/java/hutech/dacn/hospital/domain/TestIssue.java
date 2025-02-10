@@ -1,56 +1,74 @@
 package hutech.dacn.hospital.domain;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
 @Table(name = "TestIssue")
 public class TestIssue {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long testIssueId;
+    @Column(name = "TestIssuesID", length = 30)
+    private String testIssuesID;
 
     @ManyToOne
-    @JoinColumn(name = "testId")
-    private Test test;
+    @JoinColumn(name = "MedicalRecordID", referencedColumnName = "MedicalRecordID")
+    private MedicalRecordDetail medicalRecordID;
 
     @ManyToOne
-    @JoinColumn(name = "medicalRecordId")
-    private MedicalRecord medicalRecord;
+    @JoinColumn(name = "DoctorID", referencedColumnName = "DoctorID")
+    private MedicalRecordDetail doctorID;
 
-    private String status;
+    @Column(name = "Date")
+    private  Date date;
 
-    // Audit fields
+    @Column(name = "Status", length = 30)
+    private  String status;
+
+    @Column(name = "CreateUser", length = 30)
     private String createUser;
-    private Date createDate;
+
+    @Column(name = "CreateDate")
+    private LocalDateTime createDate;
+
+    @Column(name = "UpdateUser", length = 30)
     private String updateUser;
-    private Date updateDate;
 
-    // Getters and setters
+    @Column(name = "UpdateDate")
+    private LocalDateTime updateDate;
 
-    public Long getTestIssueId() {
-        return testIssueId;
+    public String getTestIssuesID() {
+        return testIssuesID;
     }
 
-    public void setTestIssueId(Long testIssueId) {
-        this.testIssueId = testIssueId;
+    public void setTestIssuesID(String testIssuesID) {
+        this.testIssuesID = testIssuesID;
     }
 
-    public Test getTest() {
-        return test;
+    public MedicalRecordDetail getMedicalRecordID() {
+        return medicalRecordID;
     }
 
-    public void setTest(Test test) {
-        this.test = test;
+    public void setMedicalRecordID(MedicalRecordDetail medicalRecordID) {
+        this.medicalRecordID = medicalRecordID;
     }
 
-    public MedicalRecord getMedicalRecord() {
-        return medicalRecord;
+    public MedicalRecordDetail getDoctorID() {
+        return doctorID;
     }
 
-    public void setMedicalRecord(MedicalRecord medicalRecord) {
-        this.medicalRecord = medicalRecord;
+    public void setDoctorID(MedicalRecordDetail doctorID) {
+        this.doctorID = doctorID;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public String getStatus() {
@@ -69,11 +87,11 @@ public class TestIssue {
         this.createUser = createUser;
     }
 
-    public Date getCreateDate() {
+    public LocalDateTime getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Date createDate) {
+    public void setCreateDate(LocalDateTime createDate) {
         this.createDate = createDate;
     }
 
@@ -85,11 +103,11 @@ public class TestIssue {
         this.updateUser = updateUser;
     }
 
-    public Date getUpdateDate() {
+    public LocalDateTime getUpdateDate() {
         return updateDate;
     }
 
-    public void setUpdateDate(Date updateDate) {
+    public void setUpdateDate(LocalDateTime updateDate) {
         this.updateDate = updateDate;
     }
 }

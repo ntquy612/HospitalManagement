@@ -1,48 +1,65 @@
 package hutech.dacn.hospital.domain;
 
 import jakarta.persistence.*;
-
-import java.util.Date;
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Table(name = "Medicines")
+@Table(name = "medicines")
 public class Medicine {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long medicinesId;
+    @Column(name = "medicinesID", length = 30, unique = true)
+    private String medicinesID;
 
     @ManyToOne
-    @JoinColumn(name = "medicinesTypeId", nullable = false)
-    private MedicineType medicinesType;
+    @JoinColumn(name = "medicinesTypeID", referencedColumnName = "medicinesTypeID")
+    private MedicineType medicineType;
 
+    @Column(name = "medicinesName", length = 100, unique = true)
     private String medicinesName;
-    private Integer quantity;
 
-    // Audit fields
+    @Column(name = "quantity")
+    private int quantity;
+
+    @Column(name = "createUser", length = 30)
     private String createUser;
-    private String createName;
-    private Date createDate;
+
+    @Column(name = "createDate")
+    private LocalDateTime createDate;
+
+    @Column(name = "updateUser", length = 30)
     private String updateUser;
-    private String updateName;
-    private Date updateDate;
 
-    // Getters and Setters
-    public Long getMedicinesId() {
-        return medicinesId;
+    @Column(name = "updateDate")
+    private LocalDateTime updateDate;
+
+    @OneToMany(mappedBy = "medicines")
+    private List<MedicinesDetail> medicinesDetails;
+
+    public List<MedicinesDetail> getMedicinesDetails() {
+        return medicinesDetails;
     }
 
-    public void setMedicinesId(Long medicinesId) {
-        this.medicinesId = medicinesId;
+    public void setMedicinesDetails(List<MedicinesDetail> medicinesDetails) {
+        this.medicinesDetails = medicinesDetails;
     }
 
-    public MedicineType getMedicinesType() {
-        return medicinesType;
+    public String getMedicinesID() {
+        return medicinesID;
     }
 
-    public void setMedicinesType(MedicineType medicinesType) {
-        this.medicinesType = medicinesType;
+    public void setMedicinesID(String medicinesID) {
+        this.medicinesID = medicinesID;
+    }
+
+    public MedicineType getMedicineType() {
+        return medicineType;
+    }
+
+    public void setMedicineType(MedicineType medicineType) {
+        this.medicineType = medicineType;
     }
 
     public String getMedicinesName() {
@@ -53,11 +70,11 @@ public class Medicine {
         this.medicinesName = medicinesName;
     }
 
-    public Integer getQuantity() {
+    public int getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Integer quantity) {
+    public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
 
@@ -69,19 +86,11 @@ public class Medicine {
         this.createUser = createUser;
     }
 
-    public String getCreateName() {
-        return createName;
-    }
-
-    public void setCreateName(String createName) {
-        this.createName = createName;
-    }
-
-    public Date getCreateDate() {
+    public LocalDateTime getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Date createDate) {
+    public void setCreateDate(LocalDateTime createDate) {
         this.createDate = createDate;
     }
 
@@ -93,21 +102,11 @@ public class Medicine {
         this.updateUser = updateUser;
     }
 
-    public String getUpdateName() {
-        return updateName;
-    }
-
-    public void setUpdateName(String updateName) {
-        this.updateName = updateName;
-    }
-
-    public Date getUpdateDate() {
+    public LocalDateTime getUpdateDate() {
         return updateDate;
     }
 
-    public void setUpdateDate(Date updateDate) {
+    public void setUpdateDate(LocalDateTime updateDate) {
         this.updateDate = updateDate;
     }
-
 }
-

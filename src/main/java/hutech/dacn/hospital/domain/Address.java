@@ -2,50 +2,66 @@ package hutech.dacn.hospital.domain;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
 @Table(name = "Address")
 public class Address {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long addressId;
 
-    private String streetNumber;
-    private String ward;
+    @Id
+    @Column(name = "AddressID", length = 30)
+    private String addressID;
+
+    @Column(name = "AddressNumber", length = 50)
+    private String addressNumber;
+
+    @Column(name = "Street", length = 100)
+    private String street;
+
+    @Column(name = "District", length = 100)
     private String district;
+
+    @Column(name = "Ward", length = 100)
+    private String ward;
+
+    @Column(name = "City", length = 100)
     private String city;
 
-    // Audit fields
+    @Column(name = "CreateUser", length = 30)
     private String createUser;
-    private Date createDate;
+
+    @Column(name = "CreateDate")
+    private LocalDateTime createDate;
+
+    @Column(name = "UpdateUser", length = 30)
     private String updateUser;
-    private Date updateDate;
 
-    // Getters and setters
+    @Column(name = "UpdateDate")
+    private LocalDateTime updateDate;
 
-    public Long getAddressId() {
-        return addressId;
+    public String getAddressID() {
+        return addressID;
     }
 
-    public void setAddressId(Long addressId) {
-        this.addressId = addressId;
+    public void setAddressID(String addressID) {
+        this.addressID = addressID;
     }
 
-    public String getStreetNumber() {
-        return streetNumber;
+    public String getAddressNumber() {
+        return addressNumber;
     }
 
-    public void setStreetNumber(String streetNumber) {
-        this.streetNumber = streetNumber;
+    public void setAddressNumber(String addressNumber) {
+        this.addressNumber = addressNumber;
     }
 
-    public String getWard() {
-        return ward;
+    public String getStreet() {
+        return street;
     }
 
-    public void setWard(String ward) {
-        this.ward = ward;
+    public void setStreet(String street) {
+        this.street = street;
     }
 
     public String getDistrict() {
@@ -54,6 +70,14 @@ public class Address {
 
     public void setDistrict(String district) {
         this.district = district;
+    }
+
+    public String getWard() {
+        return ward;
+    }
+
+    public void setWard(String ward) {
+        this.ward = ward;
     }
 
     public String getCity() {
@@ -72,11 +96,11 @@ public class Address {
         this.createUser = createUser;
     }
 
-    public Date getCreateDate() {
+    public LocalDateTime getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Date createDate) {
+    public void setCreateDate(LocalDateTime createDate) {
         this.createDate = createDate;
     }
 
@@ -88,11 +112,11 @@ public class Address {
         this.updateUser = updateUser;
     }
 
-    public Date getUpdateDate() {
+    public LocalDateTime getUpdateDate() {
         return updateDate;
     }
 
-    public void setUpdateDate(Date updateDate) {
+    public void setUpdateDate(LocalDateTime updateDate) {
         this.updateDate = updateDate;
     }
 }

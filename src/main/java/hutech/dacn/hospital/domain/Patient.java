@@ -1,6 +1,8 @@
 package hutech.dacn.hospital.domain;
 
 import jakarta.persistence.*;
+
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -8,37 +10,71 @@ import java.util.List;
 @Table(name = "Patient")
 public class Patient {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long patientId;
+    @Column(name = "PatientID", length = 30)
+    private String patientID;
 
-    private String name;
-    private String gender;
-    private String phone;
-    private String email;
-    private String identityIdentification;
-    private String status;
-
-    @OneToOne
-    @JoinColumn(name = "addressId", referencedColumnName = "addressId")
+    @ManyToOne
+    @JoinColumn(name = "AddressID", referencedColumnName = "AddressID")
     private Address address;
 
-    @OneToMany(mappedBy = "patient", cascade = CascadeType.ALL)
-    private List<MedicalRecord> medicalRecords;
+    @Column(name = "IsMain")
+    private Boolean isMain;
 
-    // Audit fields
+    @Column(name = "Name", length = 100)
+    private String name;
+
+    @Column(name = "Gender", length = 100)
+    private String gender;
+
+    @Column(name = "Phone", length = 100)
+    private String phone;
+
+    @Column(name = "Email", length = 100)
+    private String gmail;
+
+    @Column(name = "IdentityID", length = 100, unique = true)
+    private String identityID;
+
+    @Column(name = "HealthIdentification", length = 100, unique = true)
+    private String healthIdentification;
+
+    @Column(name = "Status", length = 100)
+    private String status;
+
+    @Column(name = "CreateUser", length = 30)
     private String createUser;
-    private Date createDate;
+
+    @Column(name = "CreateDate")
+    private LocalDateTime createDate;
+
+    @Column(name = "UpdateUser", length = 30)
     private String updateUser;
-    private Date updateDate;
 
-    // Getters and setters
+    @Column(name = "UpdateDate")
+    private LocalDateTime updateDate;
 
-    public Long getPatientId() {
-        return patientId;
+    public String getPatientID() {
+        return patientID;
     }
 
-    public void setPatientId(Long patientId) {
-        this.patientId = patientId;
+    public void setPatientID(String patientID) {
+        this.patientID = patientID;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    public Boolean getMain() {
+        return isMain;
+    }
+
+    public void setMain(Boolean main) {
+        isMain = main;
     }
 
     public String getName() {
@@ -65,20 +101,28 @@ public class Patient {
         this.phone = phone;
     }
 
-    public String getEmail() {
-        return email;
+    public String getGmail() {
+        return gmail;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setGmail(String gmail) {
+        this.gmail = gmail;
     }
 
-    public String getIdentityIdentification() {
-        return identityIdentification;
+    public String getIdentityID() {
+        return identityID;
     }
 
-    public void setIdentityIdentification(String identityIdentification) {
-        this.identityIdentification = identityIdentification;
+    public void setIdentityID(String identityID) {
+        this.identityID = identityID;
+    }
+
+    public String getHealthIdentification() {
+        return healthIdentification;
+    }
+
+    public void setHealthIdentification(String healthIdentification) {
+        this.healthIdentification = healthIdentification;
     }
 
     public String getStatus() {
@@ -89,22 +133,6 @@ public class Patient {
         this.status = status;
     }
 
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address address) {
-        this.address = address;
-    }
-
-    public List<MedicalRecord> getMedicalRecords() {
-        return medicalRecords;
-    }
-
-    public void setMedicalRecords(List<MedicalRecord> medicalRecords) {
-        this.medicalRecords = medicalRecords;
-    }
-
     public String getCreateUser() {
         return createUser;
     }
@@ -113,11 +141,11 @@ public class Patient {
         this.createUser = createUser;
     }
 
-    public Date getCreateDate() {
+    public LocalDateTime getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Date createDate) {
+    public void setCreateDate(LocalDateTime createDate) {
         this.createDate = createDate;
     }
 
@@ -129,11 +157,11 @@ public class Patient {
         this.updateUser = updateUser;
     }
 
-    public Date getUpdateDate() {
+    public LocalDateTime getUpdateDate() {
         return updateDate;
     }
 
-    public void setUpdateDate(Date updateDate) {
+    public void setUpdateDate(LocalDateTime updateDate) {
         this.updateDate = updateDate;
     }
 }

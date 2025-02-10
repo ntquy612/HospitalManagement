@@ -1,23 +1,24 @@
 package hutech.dacn.hospital.domain;
 
 import jakarta.persistence.*;
-
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.List;
 
 @Entity
-@Table(name = "WorkSchedule")
-public class WorkSchedule {
+@Table(name = "medicinesDetail")
+public class MedicinesDetail {
     @Id
-    @Column(name = "WorkScheduleID", length = 30)
-    private String workScheduleID;
+    @ManyToOne
+    @JoinColumn(name = "medicineID", referencedColumnName = "medicinesID")
+    private Medicine medicine;
 
-    @Column(name = "Date", unique = true)
-    private Date date;
+    @Id
+    @ManyToOne
+    @JoinColumn(name = "unitID", referencedColumnName = "UnitID")
+    private Unit unit;
 
-    @Column(name = "Status")
-    private Boolean status;
+    @Column(name = "price", length = 100, unique = true)
+    private BigDecimal price;
 
     @Column(name = "createUser", length = 30)
     private String createUser;
@@ -31,39 +32,28 @@ public class WorkSchedule {
     @Column(name = "updateDate")
     private LocalDateTime updateDate;
 
-    @OneToMany(mappedBy = "WorkSchedule")
-    private List<WorkScheduleDetail> workScheduleDetails;
-
-    public List<WorkScheduleDetail> getWorkScheduleDetails() {
-        return workScheduleDetails;
+    public Medicine getMedicine() {
+        return medicine;
     }
 
-    public void setWorkScheduleDetails(List<WorkScheduleDetail> workScheduleDetails) {
-        this.workScheduleDetails = workScheduleDetails;
+    public void setMedicine(Medicine medicine) {
+        this.medicine = medicine;
     }
 
-    public String getWorkScheduleID() {
-        return workScheduleID;
+    public Unit getUnit() {
+        return unit;
     }
 
-    public void setWorkScheduleID(String workScheduleID) {
-        this.workScheduleID = workScheduleID;
+    public void setUnit(Unit unit) {
+        this.unit = unit;
     }
 
-    public Date getDate() {
-        return date;
+    public BigDecimal getPrice() {
+        return price;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
-    public Boolean getStatus() {
-        return status;
-    }
-
-    public void setStatus(Boolean status) {
-        this.status = status;
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 
     public String getCreateUser() {
@@ -98,4 +88,3 @@ public class WorkSchedule {
         this.updateDate = updateDate;
     }
 }
-
