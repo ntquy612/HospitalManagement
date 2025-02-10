@@ -9,12 +9,12 @@ import java.util.List;
 @Entity
 @Table(name = "TestIssuesDetail")
 public class TestIssueDetail {
-    @Id
+    @EmbeddedId
     @ManyToOne
     @JoinColumn(name = "TestIssuesID", referencedColumnName = "TestIssuesID")
     private TestIssue testIssue;
 
-    @Id
+    @EmbeddedId
     @ManyToOne
     @JoinColumn(name = "TestID", referencedColumnName = "TestID")
     private Test test;
@@ -34,8 +34,49 @@ public class TestIssueDetail {
     @Column(name = "UpdateDate")
     private LocalDateTime updateDate;
 
-    @OneToMany(mappedBy = "TestIssuesDetail")
-    private List<MedicinesDetail> medicinesDetails;
+    @OneToMany(mappedBy = "testIssueID")
+    private List<TestIssueResult> testIssueIDResults;
+
+    @OneToMany(mappedBy = "testID")
+    private List<TestIssueResult> testIDIssueResults;
+
+    @OneToMany(mappedBy = "testIssuesID")
+    private List<TestResultImage> testIssuesIDTestResultImages;
+
+    @OneToMany(mappedBy = "testID")
+    private List<TestResultImage> testIDTestResultImages;
+
+    public List<TestIssueResult> getTestIssueIDResults() {
+        return testIssueIDResults;
+    }
+
+    public void setTestIssueIDResults(List<TestIssueResult> testIssueIDResults) {
+        this.testIssueIDResults = testIssueIDResults;
+    }
+
+    public List<TestIssueResult> getTestIDIssueResults() {
+        return testIDIssueResults;
+    }
+
+    public void setTestIDIssueResults(List<TestIssueResult> testIDIssueResults) {
+        this.testIDIssueResults = testIDIssueResults;
+    }
+
+    public List<TestResultImage> getTestIssuesIDTestResultImages() {
+        return testIssuesIDTestResultImages;
+    }
+
+    public void setTestIssuesIDTestResultImages(List<TestResultImage> testIssuesIDTestResultImages) {
+        this.testIssuesIDTestResultImages = testIssuesIDTestResultImages;
+    }
+
+    public List<TestResultImage> getTestIDTestResultImages() {
+        return testIDTestResultImages;
+    }
+
+    public void setTestIDTestResultImages(List<TestResultImage> testIDTestResultImages) {
+        this.testIDTestResultImages = testIDTestResultImages;
+    }
 
     public TestIssue getTestIssue() {
         return testIssue;

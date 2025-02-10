@@ -2,53 +2,61 @@ package hutech.dacn.hospital.domain;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
 @Table(name = "TestResultImage")
 public class TestResultImage {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long testResultImageId;
-
+    @EmbeddedId
     @ManyToOne
-    @JoinColumn(name = "testIssueResultId")
-    private TestIssueResult testIssueResult;
+    @JoinColumn(name = "TestIssuesID", referencedColumnName = "TestIssuesID")
+    private TestIssueDetail testIssuesID;
 
+    @EmbeddedId
     @ManyToOne
-    @JoinColumn(name = "imageId")
-    private Image image;
+    @JoinColumn(name = "TestID", referencedColumnName = "TestID")
+    private TestIssueDetail testID;
 
-    // Audit fields
+    @EmbeddedId
+    @ManyToOne
+    @JoinColumn(name = "ImageID", referencedColumnName = "ImageID")
+    private Image imageID;
+
+    @Column(name = "createUser", length = 30)
     private String createUser;
-    private Date createDate;
+
+    @Column(name = "createDate")
+    private LocalDateTime createDate;
+
+    @Column(name = "updateUser", length = 30)
     private String updateUser;
-    private Date updateDate;
 
-    // Getters and setters
+    @Column(name = "updateDate")
+    private LocalDateTime updateDate;
 
-    public Long getTestResultImageId() {
-        return testResultImageId;
+    public TestIssueDetail getTestIssuesID() {
+        return testIssuesID;
     }
 
-    public void setTestResultImageId(Long testResultImageId) {
-        this.testResultImageId = testResultImageId;
+    public void setTestIssuesID(TestIssueDetail testIssuesID) {
+        this.testIssuesID = testIssuesID;
     }
 
-    public TestIssueResult getTestIssueResult() {
-        return testIssueResult;
+    public TestIssueDetail getTestID() {
+        return testID;
     }
 
-    public void setTestIssueResult(TestIssueResult testIssueResult) {
-        this.testIssueResult = testIssueResult;
+    public void setTestID(TestIssueDetail testID) {
+        this.testID = testID;
     }
 
-    public Image getImage() {
-        return image;
+    public Image getImageID() {
+        return imageID;
     }
 
-    public void setImage(Image image) {
-        this.image = image;
+    public void setImageID(Image imageID) {
+        this.imageID = imageID;
     }
 
     public String getCreateUser() {
@@ -59,11 +67,11 @@ public class TestResultImage {
         this.createUser = createUser;
     }
 
-    public Date getCreateDate() {
+    public LocalDateTime getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Date createDate) {
+    public void setCreateDate(LocalDateTime createDate) {
         this.createDate = createDate;
     }
 
@@ -75,11 +83,11 @@ public class TestResultImage {
         this.updateUser = updateUser;
     }
 
-    public Date getUpdateDate() {
+    public LocalDateTime getUpdateDate() {
         return updateDate;
     }
 
-    public void setUpdateDate(Date updateDate) {
+    public void setUpdateDate(LocalDateTime updateDate) {
         this.updateDate = updateDate;
     }
 }

@@ -2,23 +2,36 @@ package hutech.dacn.hospital.domain;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
+
+@Entity
+@Table(name = "MedicalRecordDetail")
 public class MedicalRecordDetail {
-    @Id
+    @EmbeddedId
+    @ManyToOne
+    @JoinColumn(name = "WorkScheduleID", referencedColumnName = "WorkScheduleID")
+    private WorkScheduleDetail workScheduleID;
+
+    @EmbeddedId
     @ManyToOne
     @JoinColumn(name = "MedicalRecordID", referencedColumnName = "MedicalRecordID")
     private MedicalRecord medicalRecord;
 
-    @Id
+    @EmbeddedId
     @ManyToOne
     @JoinColumn(name = "DoctorID", referencedColumnName = "DoctorID")
     private WorkScheduleDetail doctorID;
 
-    @Id
+    @EmbeddedId
     @ManyToOne
     @JoinColumn(name = "RoomID", referencedColumnName = "RoomID")
     private WorkScheduleDetail roomID;
 
-    @Id
+    @EmbeddedId
+    @ManyToOne
+    @JoinColumn(name = "ShiftID", referencedColumnName = "ShiftID")
+    private WorkScheduleDetail shiftID;
+
+    @EmbeddedId
     @ManyToOne
     @JoinColumn(name = "AppointmentTimeID", referencedColumnName = "AppointmentTimeID")
     private AppointmentTime appointmentTime;
@@ -37,6 +50,22 @@ public class MedicalRecordDetail {
 
     @Column(name = "updateDate")
     private LocalDateTime updateDate;
+
+    public WorkScheduleDetail getShiftID() {
+        return shiftID;
+    }
+
+    public void setShiftID(WorkScheduleDetail shiftID) {
+        this.shiftID = shiftID;
+    }
+
+    public WorkScheduleDetail getWorkScheduleID() {
+        return workScheduleID;
+    }
+
+    public void setWorkScheduleID(WorkScheduleDetail workScheduleID) {
+        this.workScheduleID = workScheduleID;
+    }
 
     public MedicalRecord getMedicalRecord() {
         return medicalRecord;

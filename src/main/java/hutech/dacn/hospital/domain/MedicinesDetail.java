@@ -3,16 +3,17 @@ package hutech.dacn.hospital.domain;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
-@Table(name = "medicinesDetail")
+@Table(name = "MedicinesDetail")
 public class MedicinesDetail {
-    @Id
+    @EmbeddedId
     @ManyToOne
-    @JoinColumn(name = "medicineID", referencedColumnName = "medicinesID")
+    @JoinColumn(name = "MedicinesID", referencedColumnName = "MedicinesID")
     private Medicine medicine;
 
-    @Id
+    @EmbeddedId
     @ManyToOne
     @JoinColumn(name = "unitID", referencedColumnName = "UnitID")
     private Unit unit;
@@ -31,6 +32,12 @@ public class MedicinesDetail {
 
     @Column(name = "updateDate")
     private LocalDateTime updateDate;
+
+    @OneToMany(mappedBy = "medicinesID")
+    private List<PrescriptionDetail> medicinesIDetails;
+
+    @OneToMany(mappedBy = "unitID")
+    private List<PrescriptionDetail> unitIDetails;
 
     public Medicine getMedicine() {
         return medicine;
@@ -86,5 +93,21 @@ public class MedicinesDetail {
 
     public void setUpdateDate(LocalDateTime updateDate) {
         this.updateDate = updateDate;
+    }
+
+    public List<PrescriptionDetail> getMedicinesIDetails() {
+        return medicinesIDetails;
+    }
+
+    public void setMedicinesIDetails(List<PrescriptionDetail> medicinesIDetails) {
+        this.medicinesIDetails = medicinesIDetails;
+    }
+
+    public List<PrescriptionDetail> getUnitIDetails() {
+        return unitIDetails;
+    }
+
+    public void setUnitIDetails(List<PrescriptionDetail> unitIDetails) {
+        this.unitIDetails = unitIDetails;
     }
 }

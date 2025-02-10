@@ -2,67 +2,103 @@ package hutech.dacn.hospital.domain;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
 @Table(name = "TestIssuesResult")
 public class TestIssueResult {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+    @EmbeddedId
     @ManyToOne
-    @JoinColumn(name = "testIssuesId")
-    private TestIssue testIssues;
+    @JoinColumn(name = "TestIssuesID", referencedColumnName = "TestIssuesID")
+    private TestIssueDetail testIssueID;
 
+    @EmbeddedId
     @ManyToOne
-    @JoinColumn(name = "testId")
-    private Test test;
+    @JoinColumn(name = "TestID", referencedColumnName = "TestID")
+    private TestIssueDetail testID;
 
+    @EmbeddedId
     @ManyToOne
-    @JoinColumn(name = "roomId")
-    private Room room;
+    @JoinColumn(name = "DoctorID", referencedColumnName = "DoctorID")
+    private WorkScheduleDetail doctorID;
 
-    private String result;
+    @EmbeddedId
+    @ManyToOne
+    @JoinColumn(name = "RoomID", referencedColumnName = "RoomID")
+    private WorkScheduleDetail roomID;
 
-    // Audit fields
+    @EmbeddedId
+    @ManyToOne
+    @JoinColumn(name = "WorkScheduleID", referencedColumnName = "WorkScheduleID")
+    private WorkScheduleDetail workScheduleID;
+
+    @EmbeddedId
+    @ManyToOne
+    @JoinColumn(name = "ShiftID", referencedColumnName = "ShiftID")
+    private WorkScheduleDetail shiftID;
+
+    @Column(name = "Result", length = 1000)
+    private  String result;
+
+    @Column(name = "CreateUser", length = 30)
     private String createUser;
-    private Date createDate;
+
+    @Column(name = "CreateDate")
+    private LocalDateTime createDate;
+
+    @Column(name = "UpdateUser", length = 30)
     private String updateUser;
-    private Date updateDate;
 
-    // Getters and setters
+    @Column(name = "UpdateDate")
+    private LocalDateTime updateDate;
 
-    public Long getId() {
-        return id;
+    public TestIssueDetail getTestIssueID() {
+        return testIssueID;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setTestIssueID(TestIssueDetail testIssueID) {
+        this.testIssueID = testIssueID;
     }
 
-    public TestIssue getTestIssues() {
-        return testIssues;
+    public TestIssueDetail getTestID() {
+        return testID;
     }
 
-    public void setTestIssues(TestIssue testIssues) {
-        this.testIssues = testIssues;
+    public void setTestID(TestIssueDetail testID) {
+        this.testID = testID;
     }
 
-    public Test getTest() {
-        return test;
+    public WorkScheduleDetail getDoctorID() {
+        return doctorID;
     }
 
-    public void setTest(Test test) {
-        this.test = test;
+    public void setDoctorID(WorkScheduleDetail doctorID) {
+        this.doctorID = doctorID;
     }
 
-    public Room getRoom() {
-        return room;
+    public WorkScheduleDetail getRoomID() {
+        return roomID;
     }
 
-    public void setRoom(Room room) {
-        this.room = room;
+    public void setRoomID(WorkScheduleDetail roomID) {
+        this.roomID = roomID;
+    }
+
+    public WorkScheduleDetail getWorkScheduleID() {
+        return workScheduleID;
+    }
+
+    public void setWorkScheduleID(WorkScheduleDetail workScheduleID) {
+        this.workScheduleID = workScheduleID;
+    }
+
+    public WorkScheduleDetail getShiftID() {
+        return shiftID;
+    }
+
+    public void setShiftID(WorkScheduleDetail shiftID) {
+        this.shiftID = shiftID;
     }
 
     public String getResult() {
@@ -81,11 +117,11 @@ public class TestIssueResult {
         this.createUser = createUser;
     }
 
-    public Date getCreateDate() {
+    public LocalDateTime getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(Date createDate) {
+    public void setCreateDate(LocalDateTime createDate) {
         this.createDate = createDate;
     }
 
@@ -97,11 +133,11 @@ public class TestIssueResult {
         this.updateUser = updateUser;
     }
 
-    public Date getUpdateDate() {
+    public LocalDateTime getUpdateDate() {
         return updateDate;
     }
 
-    public void setUpdateDate(Date updateDate) {
+    public void setUpdateDate(LocalDateTime updateDate) {
         this.updateDate = updateDate;
     }
 }

@@ -9,22 +9,22 @@ import java.util.List;
 @Entity
 @Table(name = "WorkScheduleDetail")
 public class WorkScheduleDetail {
-    @Id
+    @EmbeddedId
     @ManyToOne
     @JoinColumn(name = "WorkScheduleID", referencedColumnName = "WorkScheduleID")
     private WorkSchedule workSchedule;
 
-    @Id
+    @EmbeddedId
     @ManyToOne
     @JoinColumn(name = "DoctorID", referencedColumnName = "DoctorID")
     private Doctor doctor;
 
-    @Id
+    @EmbeddedId
     @ManyToOne
     @JoinColumn(name = "ShiftID", referencedColumnName = "ShiftID")
     private Shift shift;
 
-    @Id
+    @EmbeddedId
     @ManyToOne
     @JoinColumn(name = "RoomID", referencedColumnName = "RoomID")
     private Room room;
@@ -44,8 +44,30 @@ public class WorkScheduleDetail {
     @Column(name = "UpdateDate")
     private LocalDateTime updateDate;
 
-    @OneToMany(mappedBy = "WorkScheduleDetail")
-    private List<MedicalRecordDetail> medicalRecordDetails;
+    @OneToMany(mappedBy = "workScheduleID")
+    private List<MedicalRecordDetail> workScheduleIDetails;
+
+    @OneToMany(mappedBy = "doctorID")
+    private List<MedicalRecordDetail> doctorIDetails;
+
+    @OneToMany(mappedBy = "roomID")
+    private List<MedicalRecordDetail> roomIDetails;
+
+    @OneToMany(mappedBy = "shiftID")
+    private List<MedicalRecordDetail> shiftIDetails;
+
+    @OneToMany(mappedBy = "workScheduleID")
+    private List<TestIssueResult> workScheduleIDTestIssueResults;
+
+    @OneToMany(mappedBy = "doctorID")
+    private List<TestIssueResult> doctorIDTestIssueResults;
+
+    @OneToMany(mappedBy = "roomID")
+    private List<TestIssueResult> roomIDTestIssueResults;
+
+    @OneToMany(mappedBy = "shiftID")
+    private List<TestIssueResult> shiftIDTestIssueResults;
+
 
     public WorkSchedule getWorkSchedule() {
         return workSchedule;
@@ -119,11 +141,67 @@ public class WorkScheduleDetail {
         this.updateDate = updateDate;
     }
 
-    public List<MedicalRecordDetail> getMedicalRecordDetails() {
-        return medicalRecordDetails;
+    public List<MedicalRecordDetail> getWorkScheduleIDetails() {
+        return workScheduleIDetails;
     }
 
-    public void setMedicalRecordDetails(List<MedicalRecordDetail> medicalRecordDetails) {
-        this.medicalRecordDetails = medicalRecordDetails;
+    public void setWorkScheduleIDetails(List<MedicalRecordDetail> workScheduleIDetails) {
+        this.workScheduleIDetails = workScheduleIDetails;
+    }
+
+    public List<MedicalRecordDetail> getDoctorIDetails() {
+        return doctorIDetails;
+    }
+
+    public void setDoctorIDetails(List<MedicalRecordDetail> doctorIDetails) {
+        this.doctorIDetails = doctorIDetails;
+    }
+
+    public List<MedicalRecordDetail> getRoomIDetails() {
+        return roomIDetails;
+    }
+
+    public void setRoomIDetails(List<MedicalRecordDetail> roomIDetails) {
+        this.roomIDetails = roomIDetails;
+    }
+
+    public List<MedicalRecordDetail> getShiftIDetails() {
+        return shiftIDetails;
+    }
+
+    public void setShiftIDetails(List<MedicalRecordDetail> shiftIDetails) {
+        this.shiftIDetails = shiftIDetails;
+    }
+
+    public List<TestIssueResult> getWorkScheduleIDTestIssueResults() {
+        return workScheduleIDTestIssueResults;
+    }
+
+    public void setWorkScheduleIDTestIssueResults(List<TestIssueResult> workScheduleIDTestIssueResults) {
+        this.workScheduleIDTestIssueResults = workScheduleIDTestIssueResults;
+    }
+
+    public List<TestIssueResult> getDoctorIDTestIssueResults() {
+        return doctorIDTestIssueResults;
+    }
+
+    public void setDoctorIDTestIssueResults(List<TestIssueResult> doctorIDTestIssueResults) {
+        this.doctorIDTestIssueResults = doctorIDTestIssueResults;
+    }
+
+    public List<TestIssueResult> getRoomIDTestIssueResults() {
+        return roomIDTestIssueResults;
+    }
+
+    public void setRoomIDTestIssueResults(List<TestIssueResult> roomIDTestIssueResults) {
+        this.roomIDTestIssueResults = roomIDTestIssueResults;
+    }
+
+    public List<TestIssueResult> getShiftIDTestIssueResults() {
+        return shiftIDTestIssueResults;
+    }
+
+    public void setShiftIDTestIssueResults(List<TestIssueResult> shiftIDTestIssueResults) {
+        this.shiftIDTestIssueResults = shiftIDTestIssueResults;
     }
 }

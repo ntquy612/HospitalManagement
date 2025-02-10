@@ -36,7 +36,7 @@ public class Room {
     @Column(name = "UpdateDate")
     private LocalDateTime updateDate;
 
-    @OneToMany(mappedBy = "Room")
+    @OneToMany(mappedBy = "room")
     private List<WorkScheduleDetail> workScheduleDetails;
 
     public String getRoomID() {
