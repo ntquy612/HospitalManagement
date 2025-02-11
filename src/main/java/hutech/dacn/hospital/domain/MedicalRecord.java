@@ -91,4 +91,3 @@ public class MedicalRecord {
         this.updateDate = updateDate;
     }
 }
-

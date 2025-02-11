@@ -8,5 +8,5 @@ import java.util.Optional;
 
 @Repository
 public interface ShiftRepository extends JpaRepository<Shift, String> {
-    Optional<Shift> getByShiftId(String shiftId);
+    Optional<Shift> getByShiftID(String shiftId);
 }

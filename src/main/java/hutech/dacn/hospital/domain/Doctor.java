@@ -181,4 +181,3 @@ public class Doctor {
         this.updateDate = updateDate;
     }
 }
-

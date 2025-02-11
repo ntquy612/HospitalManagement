@@ -13,12 +13,12 @@ public class PatientService {
     private PatientRepository patientRepository;
 
     public Patient getByPatientId(String patientId) {
-        return patientRepository.getByPatientId(patientId);
+        return patientRepository.getByPatientID(patientId);
     }
 
-    public Patient getByAccountId(String accountId) {
-        return patientRepository.getByAccountId(accountId);
-    }
+//    public Patient getByAccountId(String accountId) {
+//        return patientRepository.getByAccountId(accountId);
+//    }
 
     public List<Patient> get() {
         return patientRepository.findAll();

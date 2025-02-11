@@ -79,5 +79,8 @@ public class AccountService {
         return result.orElse(null);
     }
 
+    public String AutoGenID(String accountType){
+        return accountRepository.autoId(accountType);
+    }
 
 }

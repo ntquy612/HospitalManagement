@@ -120,4 +120,3 @@ public class Address {
         this.updateDate = updateDate;
     }
 }
-

@@ -17,6 +17,10 @@ public class Patient {
     @JoinColumn(name = "AddressID", referencedColumnName = "AddressID")
     private Address address;
 
+    @ManyToOne
+    @JoinColumn(name = "AccountID", referencedColumnName = "AccountID")
+    private Account account;
+
     @Column(name = "IsMain")
     private Boolean isMain;
 
@@ -101,11 +105,11 @@ public class Patient {
         this.phone = phone;
     }
 
-    public String getGmail() {
+    public String getMail() {
         return mail;
     }
 
-    public void setGmail(String gmail) {
+    public void setMail(String gmail) {
         this.mail = gmail;
     }
 

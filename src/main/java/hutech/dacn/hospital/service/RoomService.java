@@ -22,7 +22,7 @@ public class RoomService {
         Room room = new Room();
 //        room.setRoomID(customRoomId);
         room.setRoomName(request.getRoomName());
-        room.setFloor(floorRepository.getByFloorId(request.getFloorId()));
+        room.setFloor(floorRepository.getByFloorID(request.getFloorId()));
         room.setCreateDate(LocalDateTime.now());
         room.setCreateUser(request.getCreateUser());
         roomRepository.save(room);
@@ -30,10 +30,10 @@ public class RoomService {
     }
 
     public Room getByRoomId(String roomId) {
-        return roomRepository.getByRoomId(roomId);
+        return roomRepository.getByRoomID(roomId);
     }
 
-    public List<Room> getByFloorId(String floorId) {
-        return roomRepository.getByFloorId(floorId);
-    }
+//    public List<Room> getByFloorId(String floorId) {
+//        return roomRepository.getByFloorID(floorId);
+//    }
 }

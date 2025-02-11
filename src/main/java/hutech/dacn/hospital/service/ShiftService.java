@@ -27,7 +27,7 @@ public class ShiftService {
     }
 
     public Shift getById(String shiftId) {
-        Optional<Shift> shift = shiftRepository.getByShiftId(shiftId);
+        Optional<Shift> shift = shiftRepository.getByShiftID(shiftId);
         return shift.orElse(null);
     }
 }

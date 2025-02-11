@@ -8,7 +8,7 @@ import java.util.List;
 
 @Repository
 public interface RoomRepository extends JpaRepository<Room, String> {
-    Room getByRoomId(String roomId);
+    Room getByRoomID(String roomId);
 
-    List<Room> getByFloorId(String floorId);
+//    List<Room> getByFloorID(String floorId);
 }

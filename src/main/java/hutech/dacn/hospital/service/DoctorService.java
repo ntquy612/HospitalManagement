@@ -11,12 +11,12 @@ public class DoctorService {
     @Autowired
     private DoctorRepository doctorRepository;
 
-    @Autowired
-    private DoctorTypeRe
+   /* @Autowired
+    private DoctorType
 
     public boolean create(CreateDoctorRequest request) {
         Doctor doctor = new Doctor();
         doctor.setDoctorID(customDoctorId);
         doctor.setDoctorType(request.getDoctorTypeId());
-    }
+    }*/
 }

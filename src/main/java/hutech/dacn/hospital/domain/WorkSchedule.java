@@ -98,4 +98,3 @@ public class WorkSchedule {
         this.updateDate = updateDate;
     }
 }
-
