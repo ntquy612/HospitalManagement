@@ -18,6 +18,15 @@ public class AccountController {
     private AccountService accountService;
 
     // Get
+    @GetMapping("/{id}")
+    ////  http://localhost:8080/api/v1/account/BS1 (GET)
+    public ResponseEntity<?> getById(@PathVariable() String accountID) {
+        Account account = accountService.getAccountById(accountID);
+        if(account == null) {
+            return ResponseBuilder.notFound("Account not found");
+        }
+        return ResponseBuilder.ok(account);
+    }
 
     // Post
 //    @PostMapping("/register")
@@ -25,6 +34,7 @@ public class AccountController {
 //
 //    }
     @PostMapping("/login")
+    ////  http://localhost:8080/api/v1/account/login (POST)
     public ResponseEntity<?> login(@RequestBody LoginRequest request) {
         Account result = accountService.login(request.getUsername(), request.getPassword());
         if(result == null) {
@@ -34,6 +44,7 @@ public class AccountController {
     }
 
     @PostMapping("/test")
+    ////  http://localhost:8080/api/v1/account/test (POST)
     public ResponseEntity<?> test(@RequestParam String accountType) {
         String id = accountService.AutoGenID(accountType);
 
@@ -42,4 +53,8 @@ public class AccountController {
     // Put
 
     // Delete
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable String accountID) {
+        accountService.deleteAccount(accountID);
+    }
 }

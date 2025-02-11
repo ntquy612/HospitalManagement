@@ -9,9 +9,7 @@ public class RegisterRequest {
     private String district;
     private String ward;
     private String city;
-
     private String gender;
-
     private String phone;
     private String email;
     private String identityId;

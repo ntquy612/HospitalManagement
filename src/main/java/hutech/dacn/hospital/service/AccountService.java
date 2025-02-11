@@ -79,8 +79,12 @@ public class AccountService {
         return result.orElse(null);
     }
 
-    public String AutoGenID(String accountType){
+    public String AutoGenID(String accountType) {
         return accountRepository.autoId(accountType);
+    }
+
+    public void deleteAccount(String id) {
+
     }
 
 }
