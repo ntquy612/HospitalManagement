@@ -31,7 +31,7 @@ public class AccountService {
         Optional<Account> result = accountRepository.getByUsername(username);
         boolean isMatch = passwordEncoder.matches(password, result.get().getPassword());
         if(result.isPresent()){
-            if(result.get().getPassword().compareTo(password) == 0) {
+            if(isMatch) {
                 return result.get();
             }
         }
