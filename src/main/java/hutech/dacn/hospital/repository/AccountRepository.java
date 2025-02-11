@@ -13,8 +13,6 @@ import java.util.Optional;
 public interface AccountRepository extends JpaRepository<Account, String> {
     Optional<Account> getByUsername(String username);
 
-    Account getByUsernameV2(String username);
-
     Optional<Account> getByAccountId(String id);
 
     @Query(value = "select AutoIDAccount(:type)", nativeQuery = true)

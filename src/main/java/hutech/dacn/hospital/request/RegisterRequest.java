@@ -15,6 +15,15 @@ public class RegisterRequest {
     private String identityId;
     private String healthIdentification;
     private String status;
+    private String accountType;
+
+    public String getAccountType() {
+        return accountType;
+    }
+
+    public void setAccountType(String accountType) {
+        this.accountType = accountType;
+    }
 
     public String getUsername() {
         return username;

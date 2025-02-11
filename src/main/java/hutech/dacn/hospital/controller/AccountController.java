@@ -28,11 +28,21 @@ public class AccountController {
         return ResponseBuilder.ok(account);
     }
 
-    // Post
-//    @PostMapping("/register")
-//    public ResponseEntity<?> register(@RequestBody RegisterRequest request) {
-//
-//    }
+
+    @PostMapping("/registerAccountPatient")
+    public ResponseEntity<?> register(@RequestBody RegisterRequest request) {
+        try{
+            boolean result = accountService.register(request);
+            if(result){
+                return ResponseBuilder.ok();
+            }
+            return ResponseBuilder.conflict("Error occur during create account process");
+        }
+        catch (Exception ex){
+            return ResponseBuilder.conflict(ex.getMessage());
+        }
+
+    }
     @PostMapping("/login")
     ////  http://localhost:8080/api/v1/account/login (POST)
     public ResponseEntity<?> login(@RequestBody LoginRequest request) {

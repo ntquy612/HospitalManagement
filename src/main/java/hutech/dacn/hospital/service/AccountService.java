@@ -7,8 +7,9 @@ import hutech.dacn.hospital.repository.AccountRepository;
 import hutech.dacn.hospital.repository.AddressRepository;
 import hutech.dacn.hospital.repository.PatientRepository;
 import hutech.dacn.hospital.request.RegisterRequest;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -27,14 +28,14 @@ public class AccountService {
     private PatientRepository patientRepository;
     public Account login(String username, String password) {
         // Nhớ check password ByCrypt
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         Optional<Account> result = accountRepository.getByUsername(username);
-        boolean isMatch = passwordEncoder.matches(password, result.get().getPassword());
         if(result.isPresent()){
+            boolean isMatch = BCrypt.checkpw(password, result.get().getPassword());
             if(isMatch) {
                 return result.get();
             }
         }
+
         return null;
     }
 
@@ -42,33 +43,47 @@ public class AccountService {
         try {
             // Generate UserId
             // String userIdCustom = "";
-            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+            String addressId = addressRepository.autoId();
+            String accountId = accountRepository.autoId(request.getAccountType());
+            String patientId = patientRepository.autoId();
             Address address = new Address();
-//        address.setAddressId(customAddressId);
+            address.setAddressID(addressId);
             address.setAddressNumber(request.getAddressNumber());
             address.setCity(request.getCity());
             address.setDistrict(request.getDistrict());
             address.setStreet(request.getStreet());
             address.setCreateDate(LocalDateTime.now());
             address.setWard(request.getWard());
+            address.setCreateUser(patientId);
+            address.setCreateDate(LocalDateTime.now());
             addressRepository.save(address);
 
             Account account = new Account();
-//        account.setAccountId(userIdCustom);
+            String salt = BCrypt.gensalt();
+            account.setAccountId(accountId);
             account.setUsername(request.getUsername());
+            account.setStatus(request.getStatus());
+            account.setCreateUser(patientId);
+            account.setCreateDate(LocalDateTime.now());
 
-            account.setPassword(passwordEncoder.encode(request.getPassword()));
+            account.setPassword(BCrypt.hashpw(request.getPassword(), salt));
             accountRepository.save(account);
 
             Patient patient = new Patient();
-//        patient.setAddress(customAddressId);
-//        patient.setAccountId(customAccountId);
+
+            patient.setPatientID(patientId);
+            patient.setAddress(address);
+            patient.setAccount(account);
+            patient.setMain(true);
             patient.setName(request.getName());
             patient.setGender(request.getGender());
             patient.setPhone(request.getPhone());
             patient.setMail(request.getEmail());
             patient.setIdentityID(request.getIdentityId());
             patient.setHealthIdentification(request.getHealthIdentification());
+            patient.setCreateUser(patientId);
+            patient.setCreateDate(LocalDateTime.now());
+            patient.setStatus(request.getStatus());
             patientRepository.save(patient);
             return true;
         } catch (Exception ex) {

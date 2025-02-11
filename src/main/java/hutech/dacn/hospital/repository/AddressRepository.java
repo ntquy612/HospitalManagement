@@ -14,4 +14,6 @@ public interface AddressRepository extends JpaRepository<Address, String> {
     @Query(value = "SELECT * FROM Address WHERE City = :city", nativeQuery = true)
     List<Address> findByCity(@Param("city") String city);
 
+    @Query(value = "select AutoIDAddress()", nativeQuery = true)
+    String autoId();
 }
