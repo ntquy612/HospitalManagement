@@ -8,6 +8,7 @@ import hutech.dacn.hospital.repository.AddressRepository;
 import hutech.dacn.hospital.repository.PatientRepository;
 import hutech.dacn.hospital.request.RegisterRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -25,7 +26,10 @@ public class AccountService {
     @Autowired
     private PatientRepository patientRepository;
     public Account login(String username, String password) {
+        // Nhớ check password ByCrypt
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         Optional<Account> result = accountRepository.getByUsername(username);
+        boolean isMatch = passwordEncoder.matches(password, result.get().getPassword());
         if(result.isPresent()){
             if(result.get().getPassword().compareTo(password) == 0) {
                 return result.get();
@@ -38,6 +42,7 @@ public class AccountService {
         try {
             // Generate UserId
             // String userIdCustom = "";
+            BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
             Address address = new Address();
 //        address.setAddressId(customAddressId);
             address.setAddressNumber(request.getAddressNumber());
@@ -51,7 +56,8 @@ public class AccountService {
             Account account = new Account();
 //        account.setAccountId(userIdCustom);
             account.setUsername(request.getUsername());
-            account.setPassword(request.getPassword());
+
+            account.setPassword(passwordEncoder.encode(request.getPassword()));
             accountRepository.save(account);
 
             Patient patient = new Patient();
