@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface FloorRepository extends JpaRepository<Floor, String> {
+    Floor getByFloorId(String floorId);
 }
