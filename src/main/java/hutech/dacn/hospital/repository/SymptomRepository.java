@@ -6,5 +6,5 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository
-public interface SymptomRepository extends JpaRepository<Symptom, Long> {
+public interface SymptomRepository extends JpaRepository<Symptom, String> {
 }

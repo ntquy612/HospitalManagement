@@ -7,7 +7,7 @@ import java.util.Date;
 
 @Entity
 @Table(name = "Symptoms")
-public class Symptoms {
+public class Symptom {
 
     @Id
     @Column(name = "SymptomsID", length = 30)

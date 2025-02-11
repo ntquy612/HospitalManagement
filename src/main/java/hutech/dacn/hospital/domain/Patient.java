@@ -30,7 +30,7 @@ public class Patient {
     private String phone;
 
     @Column(name = "Email", length = 100)
-    private String gmail;
+    private String mail;
 
     @Column(name = "IdentityID", length = 100, unique = true)
     private String identityID;
@@ -101,12 +101,12 @@ public class Patient {
         this.phone = phone;
     }
 
-    public String getGmail() {
-        return gmail;
+    public String getMail() {
+        return mail;
     }
 
-    public void setGmail(String gmail) {
-        this.gmail = gmail;
+    public void setMail(String gmail) {
+        this.mail = gmail;
     }
 
     public String getIdentityID() {
